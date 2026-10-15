@@ -644,6 +644,68 @@ body.preload #uploadCard .upload-program-sub{margin:0;color:var(--muted);font-we
 #choiceModal .cm-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 #choiceModal .cm-actions .btn{min-width:140px}
 
+
+/* === Mejora: alta de ambientes por modal, municipio y controles accesibles === */
+.env-create-wrap{margin:12px 0 6px}
+.env-create-btn{width:100%;min-height:44px;justify-content:center;box-shadow:0 5px 16px rgba(57,169,0,.13)}
+.env-create-caption{text-align:center;font-size:11px;color:var(--muted);margin:6px 0 2px}
+.env-create-feedback{font-size:12px;color:#166534;font-weight:650;margin-top:6px;line-height:1.4}
+.env-list{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.35}
+.env-list .env-item{padding:8px 4px;gap:8px;align-items:center;border-bottom:1px solid #f1f5f9}
+.env-list .env-item:last-child{border-bottom:0}
+.env-item-meta{min-width:0;display:flex;flex-direction:column;gap:3px}
+.env-item-name{font-size:12px;font-weight:850;color:var(--text);overflow-wrap:anywhere}
+.env-item-city{font-size:11px;font-weight:600;color:var(--muted)}
+.env-list .tag{max-width:42%;text-align:right;font-size:10px;overflow-wrap:anywhere}
+.pl-grid-head,.pl-grid-row{grid-template-columns:minmax(105px,145px) repeat(3,minmax(120px,1fr))}
+.pl-grid-row .lab{white-space:normal;overflow:visible;text-overflow:unset;overflow-wrap:anywhere;line-height:1.2;display:flex;flex-direction:column;justify-content:center;padding:8px}
+.pl-env-city{font-size:10px;font-weight:650;color:var(--muted);margin-top:4px;line-height:1.2}
+.env-modal[hidden],.env-modal-error[hidden]{display:none!important}
+.env-modal{position:fixed;inset:0;z-index:100010;background:rgba(15,23,42,.57);display:flex;justify-content:center;align-items:center;padding:16px;backdrop-filter:blur(3px)}
+.env-modal-card{width:min(475px,100%);background:var(--card);color:var(--text);border-radius:20px;border:1px solid rgba(148,163,184,.35);box-shadow:0 28px 65px rgba(15,23,42,.25);overflow:hidden}
+.env-modal-head{display:flex;align-items:center;gap:12px;padding:20px 22px 15px;border-bottom:1px solid var(--border);background:#f9fbfd}
+.env-modal-symbol{display:flex;align-items:center;justify-content:center;flex:0 0 40px;height:40px;border-radius:13px;background:#e9f8e2;color:var(--brand2);font-size:26px;font-weight:750}
+.env-modal-heading{flex:1;min-width:0}
+.env-modal-heading h2{margin:0;font-size:18px;color:var(--text)}
+.env-modal-heading p{margin:3px 0 0;font-size:12px;line-height:1.4;color:var(--muted)}
+.env-modal-close{border:0;background:transparent;border-radius:10px;font-size:24px;cursor:pointer;color:var(--muted);width:34px;height:34px;display:grid;place-items:center}
+.env-modal-close:hover{background:#e2e8f0}
+.env-modal-body{display:flex;flex-direction:column;gap:9px;padding:20px 22px 8px}
+.env-modal-body label{font-size:12px;font-weight:850;color:var(--text)}
+.env-modal-body label span{color:#b91c1c}
+.env-modal-body input{width:100%;padding:12px 13px;border:1px solid #cbd5e1;border-radius:11px;outline:none;background:white;color:var(--text);font:600 13px system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin-bottom:9px}
+.env-modal-body input:focus,.env-modal-close:focus-visible{border-color:var(--brand);box-shadow:var(--focus);outline:none}
+.env-modal-note{font-size:11px;color:var(--muted);margin:0 0 6px;line-height:1.45}
+.env-modal-error{padding:9px 10px;border-radius:10px;border:1px solid #fecaca;background:#fef2f2;color:#b91c1c;font-size:12px;font-weight:700;margin-bottom:6px}
+.env-modal-actions{display:flex;gap:10px;justify-content:flex-end;padding:15px 22px 20px}
+.env-modal-actions .btn{justify-content:center}
+body.env-modal-open{overflow:hidden}
+@media(max-width:520px){.env-modal-head{padding:14px}.env-modal-body{padding:16px 14px 6px}.env-modal-actions{padding:14px;flex-direction:column-reverse}.env-modal-actions .btn{width:100%}}
+@media print{body.print-grid-only .pl-grid-head,body.print-grid-only .pl-grid-row{grid-template-columns:105px repeat(3,minmax(0,1fr))!important}}
+
+/* V2: filtros, CRUD de ambientes y respaldo independiente de red */
+.grid-filter-bar{display:grid;grid-template-columns:minmax(155px,1fr) minmax(165px,1.15fr) auto;gap:8px;align-items:center;margin:0 0 10px;padding:10px;background:#f8fafc;border:1px solid var(--border);border-radius:12px}
+.grid-filter-bar select,.grid-filter-bar input{min-width:0;width:100%;padding:9px 10px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:var(--text);font:600 12px system-ui}
+.grid-filter-bar select:focus,.grid-filter-bar input:focus{outline:none;box-shadow:var(--focus);border-color:var(--brand)}
+.grid-filter-label{grid-column:1/-1;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.025em}
+.grid-filter-footer{display:flex;align-items:center;gap:8px;justify-content:space-between;margin:1px 0 8px;font-size:11px;color:var(--muted);font-weight:750}
+.env-item-actions{display:flex;gap:4px;flex-shrink:0}
+.env-item-actions button{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:7px 8px;cursor:pointer;font-size:12px;color:var(--text);white-space:nowrap;font-weight:700}
+.env-item-actions button:hover{background:#eef7e8;border-color:rgba(57,169,0,.45)}
+.env-item-actions .env-delete{color:#b91c1c;background:#fff5f5}
+.env-item-actions .env-delete:hover{background:#fee2e2;border-color:#fca5a5}
+.env-item-actions button:focus-visible{outline:none;box-shadow:var(--focus)}
+.env-list .env-item .tag{display:none}
+.env-list .env-item .env-item-meta{flex:1}
+.env-list .env-item{gap:5px}
+.env-action-sub{margin:5px 0;color:#64748b;font-size:11px;line-height:1.35}
+.backup-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.backup-controls .pa-btn{background:#f8fafc;border-color:#cbd5e1}
+.backup-controls .pa-btn:hover{background:#f0fdf4;border-color:rgba(57,169,0,.4)}
+.backup-notice{font-size:11px;color:var(--muted);margin:2px 0 0;font-weight:650}
+@media(max-width:760px){.grid-filter-bar{grid-template-columns:1fr}.grid-filter-label{grid-column:1}.env-item-actions button{padding:8px}}
+@media print{.grid-filter-bar,.grid-filter-footer,.backup-controls{display:none!important}}
+
 </style>
 </head>
 <body>
@@ -678,10 +740,10 @@ body.preload #uploadCard .upload-program-sub{margin:0;color:var(--muted);font-we
           <p class="upload-program-sub">Cargue un archivo para comenzar</p>
         </div>
 
-        <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Zona para cargar archivo Excel (.xlsx)">
-          <div class="dz-title">Arrastre y suelte el Excel (.xlsx) aquí o haga clic para seleccionar</div>
-          <div class="dz-sub">Formatos: .xml (P4-04 / PE-04)</div>
-          <input id="file" type="file" accept=".xml" class="file-input-hidden" />
+        <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Seleccionar reporte XML o ZIP que contenga XML">
+          <div class="dz-title">Arrastre un archivo XML o ZIP aquí, o haga clic para seleccionarlo</div>
+          <div class="dz-sub">Formatos: .xml y .zip con un reporte P4-04 / PE-04 · No es necesario descomprimir el ZIP</div>
+          <input id="file" type="file" accept=".xml,.zip,application/xml,application/zip" class="file-input-hidden" />
         </div>
 
         <div class="progress" id="progressWrap" style="display:none;margin-top:12px">
@@ -707,6 +769,8 @@ body.preload #uploadCard .upload-program-sub{margin:0;color:var(--muted);font-we
         <input id="q" class="search" type="search" placeholder="Buscar en ficha, programa, responsable, municipio…" aria-label="Buscar" />
         <span class="meta" id="countTop">0 resultados</span>
         <button class="btn subtle" id="clearBtn" type="button" aria-label="Limpiar filtros">Limpiar filtros</button>
+        <button class="btn subtle" id="reloadReportBtn" type="button" title="Cargar otro XML o ZIP">Cambiar archivo</button>
+        <span class="hint" id="currentSourceInfo" role="status" aria-live="polite"></span>
         
       </div>
 
@@ -952,7 +1016,13 @@ body.preload #uploadCard .upload-program-sub{margin:0;color:var(--muted);font-we
               <input id="plannerImport" type="file" accept=".xlsx" multiple style="display:none" />
             </label>
             <button class="pa-btn pa-pdf" id="plannerExportPDF" type="button"><span class="pa-ico" aria-hidden="true">🧾</span>PDF</button>
-            <button class="pa-btn pa-xlsx" id="plannerExport" type="button"><span class="pa-ico" aria-hidden="true">📊</span>Excel</button>
+            <button class="pa-btn pa-xlsx" id="plannerExport" type="button" title="Descargar Excel sin conexión"><span class="pa-ico" aria-hidden="true">📊</span>Excel</button>
+            <span class="pa-sep" aria-hidden="true"></span>
+            <div class="backup-controls" aria-label="Copias de seguridad">
+              <button class="pa-btn" id="plannerBackupExport" type="button" title="Guardar ambientes, fichas, asignaciones, notas, municipios y reporte en JSON">↓ Respaldo</button>
+              <button class="pa-btn" id="plannerBackupImportBtn" type="button" title="Restaurar una copia completa JSON">↑ Restaurar</button>
+              <input id="plannerBackupImport" type="file" accept=".json,application/json" hidden />
+            </div>
           </div>
           <div class="pa-right">
             <button class="pa-btn" id="plannerSaveChanges" type="button"><span class="pa-ico" aria-hidden="true">💾</span>Guardar Cambios</button>
@@ -985,9 +1055,16 @@ body.preload #uploadCard .upload-program-sub{margin:0;color:var(--muted);font-we
 	      <div class="pl-panel" id="plannerGridPanel">
           <div class="pl-panel-h">Cuadrícula (Ambiente × Jornada)</div>
           <div class="pl-panel-b">
+            <div class="grid-filter-bar" role="search" aria-label="Filtros de ambientes en la cuadrícula">
+              <div class="grid-filter-label">Buscar ambientes en la cuadrícula</div>
+              <select id="plannerGridMunicipio" aria-label="Filtrar ambientes por municipio"><option value="">Todos los municipios</option></select>
+              <input id="plannerGridSearch" type="search" autocomplete="off" placeholder="Nombre o código del ambiente…" aria-label="Buscar ambiente por nombre" />
+              <button id="plannerGridClear" class="btn small subtle" type="button">Limpiar</button>
+            </div>
+            <div class="grid-filter-footer"><span id="plannerGridCount" aria-live="polite">Todos los ambientes</span><span>Los filtros solo afectan la vista y las exportaciones; el respaldo incluye todo.</span></div>
             <div class="pdf-header" id="plannerPdfHeader">
               <div class="pdf-logo" aria-hidden="true">
-                <img alt="SENA" src="https://www.sena.edu.co/Style%20Library/alayout/images/logoSena.png?rev=40" />
+                <img alt="SENA" src="data:image/png;base64,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" />
               </div>
               <div>
                 <div class="pdf-title">SENA REGIONAL TOLIMA</div>
@@ -1025,16 +1102,23 @@ body.preload #uploadCard .upload-program-sub{margin:0;color:var(--muted);font-we
             <div class="env-tabpane is-active" data-envpane="amb" role="tabpanel">
               <div class="env-hint">
                 <div class="env-hint-ico" aria-hidden="true">ℹ️</div>
-                <div class="env-hint-txt">Ingrese un código de ambiente por línea. El sistema generará automáticamente las franjas horarias.</div>
+                <div class="env-hint-txt">Agregue ambientes con su municipio. Cada ambiente tendrá las jornadas Mañana, Tarde y Noche. También puede editar el listado desde Configuración.</div>
+              </div>
+
+              <div class="env-create-wrap">
+                <button class="btn primary env-create-btn" id="plannerAddEnvBtn" type="button" aria-haspopup="dialog" aria-controls="envModal">＋ Nuevo ambiente</button>
+                <p class="env-create-caption">Añadir por nombre y municipio</p>
+                <div class="env-create-feedback" id="envActionFeedback" role="status" aria-live="polite"></div>
               </div>
 
               <div class="env-sec">
                 <div class="env-sec-h">LISTADO DE AMBIENTES</div>
                 <div class="env-list" id="plannerEnvList"></div>
+                <p class="env-action-sub">Use Editar para cambiar nombre o municipio. Eliminar dejará las fichas de ese ambiente sin asignación, previa confirmación.</p>
               </div>
 
               <div class="env-actions">
-                <button class="btn" id="plannerApplyEnvs" type="button">Actualizar Grid</button>
+                <button class="btn" id="plannerApplyEnvs" type="button">Actualizar cuadrícula</button>
                 <button class="btn subtle" id="plannerRefreshEnvList" type="button" title="Refrescar" aria-label="Refrescar">⟳</button>
               </div>
 
@@ -1065,7 +1149,7 @@ body.preload #uploadCard .upload-program-sub{margin:0;color:var(--muted);font-we
             </div>
 
             <div class="env-tabpane" data-envpane="cfg" role="tabpanel" aria-hidden="true">
-              <div class="hint" style="margin-bottom:8px">Pegue un ambiente por línea (ej: <b>1010 (A)</b>, <b>1020(A)</b>, <b>2010 C</b>). El sistema crea 3 jornadas por ambiente.</div>
+              <div class="hint" style="margin-bottom:8px">Edición avanzada: escriba un ambiente por línea (ej.: <b>1010A</b>, <b>1020B</b>). Los municipios guardados se conservarán si mantiene el nombre del ambiente. Para añadir uno con municipio, use <b>+ Nuevo ambiente</b>.</div>
               <textarea id="plannerEnvs" class="search" style="min-height:180px;resize:vertical" >1010A 
 1020A 
 1030A 
@@ -1119,6 +1203,7 @@ body.preload #uploadCard .upload-program-sub{margin:0;color:var(--muted);font-we
                 </div>
               </div>
               <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+                <button class="btn small primary" id="plannerApplyEnvsConfig" type="button">Aplicar listado</button>
                 <button class="btn small subtle" id="plannerLoadDefaultEnvs" type="button">Cargar ejemplo</button>
               </div>
             </div>
@@ -1167,11 +1252,6 @@ body.preload #uploadCard .upload-program-sub{margin:0;color:var(--muted);font-we
     </div>
   </div>
 </footer>
-
-
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
 <script>
   // ================= Utilidades =================
@@ -2820,6 +2900,71 @@ function computeAvailableSets(){
     URL.revokeObjectURL(url);
   }
 
+
+  // El ZIP de PE-04 contiene XML SpreadsheetML (no es un archivo .xlsx).
+  // Reutilizamos el lector ZIP nativo que ya se usa para importar el planificador.
+  async function readReportXmlFromFile(file, onProgress){
+    if(!file) throw new Error('Seleccione un archivo XML o ZIP.');
+    const name = String(file.name || '').trim();
+    const ext = name.toLowerCase();
+    if(!/\.(xml|zip)$/.test(ext)) throw new Error('Formato no admitido. Seleccione un archivo .xml o .zip.');
+    if(file.size > 100 * 1024 * 1024) throw new Error('El archivo supera el límite de 100 MB.');
+    const progress = (p,label)=>{ if(typeof onProgress==='function') onProgress(p,label); };
+    if(ext.endsWith('.xml')){
+      progress(0,'Leyendo XML…');
+      const xmlText = await readFileAsTextWithProgress(file, p=>progress(Math.round(p*0.88),'Leyendo XML…'));
+      progress(90,'Verificando XML…');
+      return {xmlText, innerName:null};
+    }
+
+    progress(0,'Abriendo ZIP…');
+    const raw = await new Promise((resolve,reject)=>{
+      const r = new FileReader();
+      r.onerror = ()=>reject(new Error('No se pudo leer el ZIP.'));
+      r.onprogress = e=>{ if(e.lengthComputable) progress(Math.round((e.loaded/e.total)*55),'Leyendo ZIP…'); };
+      r.onload = ()=>resolve(new Uint8Array(r.result));
+      r.readAsArrayBuffer(file);
+    });
+    if(raw.length < 4 || raw[0]!==0x50 || raw[1]!==0x4b){
+      throw new Error('El archivo seleccionado no es un ZIP válido.');
+    }
+    progress(58,'Buscando el reporte XML en el ZIP…');
+    let contents;
+    try{ contents = await zipRead(raw); }
+    catch(e){ throw new Error('No se pudo abrir el ZIP: ' + e.message); }
+    const entries = Array.from(contents.entries())
+      .filter(([path,meta])=>/\.xml$/i.test(path) && !/(^|\/)__MACOSX\/|(^|\/)\._/i.test(path) && meta.uncompSize > 0)
+      .sort((a,b)=>{
+        const score = p=>/pe[-_ ]?0?4|p4[-_ ]?0?4/i.test(p)?0:1;
+        return score(a[0])-score(b[0]) || a[0].localeCompare(b[0]);
+      });
+    if(!entries.length) throw new Error('El ZIP no contiene ningún archivo XML.');
+    if(entries.length > 250) throw new Error('El ZIP contiene demasiados archivos XML.');
+    const maxXmlBytes = 90 * 1024 * 1024;
+    let failed = 0;
+    for(let i=0;i<entries.length;i++){
+      const [path,meta] = entries[i];
+      if(meta.uncompSize > maxXmlBytes){ failed++; continue; }
+      progress(Math.min(62 + Math.round(i/entries.length*25),87),'Extrayendo XML del ZIP…');
+      try{
+        const decoded = await zipFile(contents,path);
+        if(!decoded || decoded.byteLength > maxXmlBytes){ failed++; continue; }
+        const text = new TextDecoder('utf-8').decode(decoded).replace(/^\uFEFF/,'');
+        // Evitar seleccionar el XML de configuración de otro tipo de archivo ZIP.
+        if(/<(?:[\w.-]+:)?Workbook\b/i.test(text.slice(0,30000)) &&
+           /<(?:[\w.-]+:)?Worksheet\b/i.test(text.slice(0,250000))){
+          progress(90,`Procesando ${path.split('/').pop()}…`);
+          return {xmlText:text, innerName:path};
+        }
+      }catch(e){
+        failed++;
+        if(entries.length === 1) throw new Error('No se pudo extraer el XML: '+e.message);
+      }
+    }
+    throw new Error(failed === entries.length
+      ? 'No fue posible leer un XML válido del ZIP.'
+      : 'El ZIP no contiene un reporte PE-04/P4-04 en formato XML Excel 2003.');
+  }
   async function loadFromFile(file){
     // UI: overlay mientras se procesa el archivo
     let importOk = false;
@@ -2847,22 +2992,30 @@ function computeAvailableSets(){
       if($progressPct) $progressPct.textContent = "0%";
       if($dropzone) $dropzone.classList.add("drag");
 
-      const txt = await readFileAsTextWithProgress(file, (pct) => {
+      const {xmlText,innerName} = await readReportXmlFromFile(file, (pct,label) => {
         if($progressBar) $progressBar.style.width = pct + "%";
         if($progressPct) $progressPct.textContent = pct + "%";
+        if($progressLabel && label) $progressLabel.textContent = label;
+        const loSub = document.getElementById('loSub');
+        if(loSub && label) loSub.textContent = label;
       });
 
+      if($progressLabel) $progressLabel.textContent = 'Interpretando fichas…';
+      const { data } = parseExcelXml(xmlText);
       if($progressBar) $progressBar.style.width = "100%";
       if($progressPct) $progressPct.textContent = "100%";
-
-      const { data } = parseExcelXml(txt);
-      allRows = buildReportRows(data);
+      const parsedReportRows = buildReportRows(data);
       bumpDataVersion();
 
-      // Aplicar restricciones (modalidad, programa especial y municipios)
-      allRows = allRows.filter(r =>
+      // Mantener el alcance original Ibagué/Melgar cuando existan en el reporte.
+      // Para otras regionales (p. ej. el ZIP de Quindío), tomar sus municipios reales
+      // y permitir filtrarlos con el selector de Municipios.
+      const useOriginalMunicipalities = parsedReportRows.some(r =>
+        ALLOWED_MUNICIPIOS.has(normU(r.NOMBRE_MUNICIPIO_CURSO))
+      );
+      allRows = parsedReportRows.filter(r =>
         ALLOWED_MODALIDADES.has(normU(r.MODALIDAD_FORMACION)) &&
-        ALLOWED_MUNICIPIOS.has(normU(r.NOMBRE_MUNICIPIO_CURSO)) &&
+        (!useOriginalMunicipalities || ALLOWED_MUNICIPIOS.has(normU(r.NOMBRE_MUNICIPIO_CURSO))) &&
         !EXCLUDED_ESPECIALES.has(normU(r.NOMBRE_PROGRAMA_ESPECIAL))
       );
 
@@ -2921,7 +3074,10 @@ function computeAvailableSets(){
       importOk = true;
 
       // Contraer/ocultar módulo de carga
-      if($uploadSummaryRight) $uploadSummaryRight.textContent = `${file.name} (${allRows.length} registros)`;
+      const sourceLabel = innerName ? `${file.name} → ${innerName.split('/').pop()}` : file.name;
+      if($uploadSummaryRight) $uploadSummaryRight.textContent = `${sourceLabel} (${allRows.length} registros)`;
+      const info = document.getElementById('currentSourceInfo');
+      if(info) info.textContent = `${sourceLabel} · ${allRows.length} registros`;
       if($uploadAccordion) $uploadAccordion.open = false;
       if($uploadCard) setTimeout(()=>{ $uploadCard.style.display = "none"; }, 350);
       if($progressLabel) $progressLabel.textContent = "Listo";
@@ -2952,7 +3108,13 @@ function computeAvailableSets(){
 // ================= Events =================
 
   // Eventos de carga
-  if($file) $file.addEventListener("change", ()=> loadFromFile($file.files && $file.files[0]));
+  if($file) $file.addEventListener("change", ()=>{
+    const selected = $file.files && $file.files[0];
+    if(selected) loadFromFile(selected);
+    $file.value = ''; // permite seleccionar el mismo ZIP/XML nuevamente
+  });
+  const $reloadReportBtn = document.getElementById('reloadReportBtn');
+  if($reloadReportBtn) $reloadReportBtn.addEventListener('click',()=>{ if($file) $file.click(); });
 
   if($dropzone){
     const openPicker = ()=>{ if($file) $file.click(); };
@@ -3123,7 +3285,7 @@ function computeAvailableSets(){
 
   // ================= Planificador (Ambientes x Jornada) =================
   const planner = {
-    envs: [], // [{name}]
+    envs: [], // [{name, municipio}]
     assignments: new Map(), // ficha -> {ambiente, jornada, sabadoTurno, responsable}
     notes: new Map(), // dropId -> string
     sourceRows: [], // rows disponibles (por filtros)
@@ -3144,11 +3306,14 @@ function computeAvailableSets(){
     return {
       v: 1,
       ts: Date.now(),
-      envs: (planner.envs||[]).map(e=>({name:e.name})),
+      envs: (planner.envs||[]).map(e=>({name:e.name, municipio:e.municipio||''})),
       envText: (document.getElementById('plannerEnvs')?.value)||'',
       envTagsRaw: (document.getElementById('plannerEnvTags')?.value)||'',
       assignments: assigns,
-      notes: Array.from((planner.notes||new Map()).entries())
+      notes: Array.from((planner.notes||new Map()).entries()),
+      customResponsable: Array.from((planner.customResponsable||new Map()).entries()),
+      importMode: !!planner.importMode,
+      importAvailable: Array.isArray(planner.importAvailable) ? planner.importAvailable.slice() : []
     };
   }
 
@@ -3179,7 +3344,7 @@ function computeAvailableSets(){
       if($tagTa && (obj.envTagsRaw||'').trim()) $tagTa.value = obj.envTagsRaw;
 
       // Reconstruir envs
-      planner.envs = (obj.envs||[]).map(e=>({name:e.name}));
+      planner.envs = (obj.envs||[]).map(e=>({name:String(e.name||'').trim(),municipio:String(e.municipio||'').trim()})).filter(e=>e.name);
 
       // Reconstruir asignaciones
       planner.assignments = new Map();
@@ -3208,6 +3373,10 @@ function computeAvailableSets(){
           diaSemana: a.diaSemana||''
         });
       }
+      // Restaurar estado auxiliar para respaldos antiguos y nuevos.
+      planner.customResponsable = new Map(Array.isArray(obj.customResponsable) ? obj.customResponsable.filter(x=>Array.isArray(x) && x.length>=2) : []);
+      planner.importMode = !!obj.importMode;
+      planner.importAvailable = Array.isArray(obj.importAvailable) ? obj.importAvailable.map(String) : [];
       // Restaurar notas por celda (si existen)
       planner.notes = new Map();
       if(Array.isArray(obj.notes)){
@@ -3295,6 +3464,9 @@ function computeAvailableSets(){
 
     try{ restorePlannerLocal(); renderPlanner(); }catch(e){}
     try{ if(typeof wireEnvTabs==='function') wireEnvTabs(); }catch(e){}
+    try{ initNewEnvironmentModal(); }catch(e){ console.error('No se pudo inicializar el alta de ambientes',e); }
+    try{ initPlannerGridFilters(); }catch(e){ console.error('No se pudieron inicializar los filtros de cuadrícula',e); }
+    try{ initPlannerBackups(); }catch(e){ console.error('No se pudo inicializar el respaldo',e); }
     try{
       const ta = document.getElementById('plannerEnvTags');
       const btnSave = document.getElementById('plannerSaveEnvTags');
@@ -3620,8 +3792,18 @@ const $plannerExportPDF = document.getElementById('plannerExportPDF');
     setTimeout(()=>{ $plannerSearch?.focus(); }, 0);
   }
 
+  function envNameKey(value){
+    return normU(String(value||'').replace(/\s+/g,' '));
+  }
+
   function normalizeEnvLines(text){
-    return String(text||"").split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+    const seen = new Set();
+    return String(text||'').split(/\r?\n/).map(s=>s.trim().replace(/\s+/g,' ')).filter(name=>{
+      if(!name) return false;
+      const key = envNameKey(name);
+      if(seen.has(key)) return false;
+      seen.add(key); return true;
+    });
   }
 
   function syncPlannerIfOpen(){
@@ -3642,12 +3824,151 @@ const $plannerExportPDF = document.getElementById('plannerExportPDF');
     if($plannerEnvs && !raw) $plannerEnvs.value = use;
     localStorage.setItem('planner_envs_text', use);
     const lines = normalizeEnvLines(use);
-    planner.envs = lines.map(name => ({ name }));
+    const existing = new Map((planner.envs||[]).map(e=>[envNameKey(e.name),e]));
+    const kept = new Set(lines.map(envNameKey));
+    const removed = (planner.envs||[]).filter(e=>!kept.has(envNameKey(e.name)));
+    const assignedRemoved = removed.flatMap(e=>affectedFichasForEnvironment(e.name));
+    if(assignedRemoved.length && !confirm(`Esta actualización quitará ${removed.length} ambiente(s) con ${assignedRemoved.length} ficha(s) asignada(s). Las fichas quedarán disponibles para reubicar. ¿Continuar?`)){
+      if($plannerEnvs) $plannerEnvs.value=(planner.envs||[]).map(e=>e.name).join('\n');
+      return;
+    }
+    assignedRemoved.forEach(f=>planner.assignments.delete(f));
+    for(const e of removed) for(const k of [...planner.notes.keys()]) if(k.startsWith(`drop|${e.name}|`))planner.notes.delete(k);
+    planner.envs = lines.map(name=>({name,municipio:String(existing.get(envNameKey(name))?.municipio||'').trim()}));
+    if($plannerEnvs) $plannerEnvs.value = lines.join('\n');
+    localStorage.setItem('planner_envs_text', lines.join('\n'));
     renderPlannerGrid();
     markEmptyEnvsForPrint();
     savePlannerLocal('cambio de ambientes');
   }
 
+
+
+
+  function affectedFichasForEnvironment(name){
+    return [...(planner.assignments||new Map()).entries()]
+      .filter(([,a])=>envNameKey(a.ambiente)===envNameKey(name))
+      .map(([f])=>f);
+  }
+
+  function syncEnvironmentCollection(reason){
+    if($plannerEnvs) $plannerEnvs.value=(planner.envs||[]).map(e=>e.name).join('\n');
+    try{localStorage.setItem('planner_envs_text',$plannerEnvs?.value||'');}catch(e){}
+    renderPlannerGrid();
+    markEmptyEnvsForPrint();
+    renderPending();
+    savePlannerLocal(reason);
+  }
+
+  function initNewEnvironmentModal(){
+    const modal = document.getElementById('envModal');
+    const openBtn = document.getElementById('plannerAddEnvBtn');
+    const form = document.getElementById('newEnvForm');
+    const nameInput = document.getElementById('newEnvName');
+    const cityInput = document.getElementById('newEnvMunicipio');
+    const error = document.getElementById('envModalError');
+    const cityList = document.getElementById('envMunicipioSuggestions');
+    const feedback = document.getElementById('envActionFeedback');
+    const list = document.getElementById('plannerEnvList');
+    if(!modal || !form || !openBtn || !list) return;
+    let originName = '';
+    let focusBefore = null;
+
+    const setError = msg=>{error.textContent=msg||'';error.hidden=!msg;};
+    const close=()=>{
+      modal.hidden=true;
+      document.body.classList.remove('env-modal-open');
+      form.reset();setError('');originName='';
+      (focusBefore && focusBefore.isConnected ? focusBefore : openBtn).focus();
+    };
+    const open=(name='')=>{
+      // Capture advanced-editor changes only for new, not for editing a current item.
+      if(!name && !planner.envs.length && $plannerEnvs) applyEnvsFromTextarea();
+      const edit = !!name;
+      const obj = edit ? (planner.envs||[]).find(e=>envNameKey(e.name)===envNameKey(name)) : null;
+      if(edit && !obj) return;
+      originName=edit?obj.name:'';
+      focusBefore=document.activeElement;
+      form.reset();setError('');
+      document.getElementById('envModalTitle').textContent=edit?'Editar ambiente':'Nuevo ambiente';
+      document.getElementById('envModalDescription').textContent=edit?'Cambie el nombre o municipio. Las fichas asignadas conservarán su horario.':'Complete los datos para añadirlo al planificador.';
+      document.getElementById('envModalSave').textContent=edit?'Guardar cambios':'Guardar ambiente';
+      const cities=[...new Set([...(planner.envs||[]).map(e=>String(e.municipio||'').trim()), ...(Array.isArray(municipalities)?municipalities:[])].filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+      cityList.replaceChildren(...cities.map(c=>{const op=document.createElement('option');op.value=c;return op;}));
+      nameInput.value=obj?.name||'';
+      cityInput.value=obj?.municipio||'';
+      modal.hidden=false;
+      document.body.classList.add('env-modal-open');
+      nameInput.focus();nameInput.select();
+    };
+    openBtn.addEventListener('click',()=>open(''));
+    list.addEventListener('click',e=>{
+      const btn=e.target.closest('[data-env-action]');
+      if(!btn || !list.contains(btn))return;
+      const name=btn.dataset.envName||'';
+      if(btn.dataset.envAction==='edit') open(name);
+      else if(btn.dataset.envAction==='delete'){
+        const env=(planner.envs||[]).find(x=>envNameKey(x.name)===envNameKey(name));
+        if(!env)return;
+        const affected=affectedFichasForEnvironment(env.name);
+        const msg=affected.length
+          ? `¿Eliminar el ambiente "${env.name}" (${env.municipio||'Sin municipio'})?\n\nTiene ${affected.length} ficha(s) asignada(s): ${affected.slice(0,10).join(', ')}${affected.length>10?'…':''}.\n\nLas fichas quedarán SIN ASIGNACIÓN para poder reubicarlas. Se eliminarán las notas de este ambiente. No se borrarán los registros del reporte ni los respaldos JSON ya descargados.`
+          : `¿Eliminar el ambiente "${env.name}" (${env.municipio||'Sin municipio'})?`;
+        if(!confirm(msg))return;
+        planner.envs=planner.envs.filter(x=>envNameKey(x.name)!==envNameKey(env.name));
+        for(const f of affected) planner.assignments.delete(f);
+        const prefix=`drop|${env.name}|`;
+        for(const k of [...(planner.notes||new Map()).keys()]) if(k.startsWith(prefix)) planner.notes.delete(k);
+        syncEnvironmentCollection('eliminación de ambiente');
+        if(feedback)feedback.textContent=`Se eliminó ${env.name}. ${affected.length} ficha(s) quedaron disponibles para reubicar.`;
+      }
+    });
+    document.getElementById('envModalCancel').addEventListener('click',close);
+    document.getElementById('envModalClose').addEventListener('click',close);
+    modal.addEventListener('click',e=>{if(e.target===modal)close();});
+    modal.addEventListener('keydown',e=>{
+      if(e.key==='Escape'){e.preventDefault();close();return;}
+      if(e.key!=='Tab')return;
+      const items=[...modal.querySelectorAll('button:not([disabled]),input:not([disabled])')];
+      const first=items[0],last=items[items.length-1];
+      if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+      else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+    });
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const name=String(nameInput.value||'').trim().replace(/\s+/g,' ');
+      const municipio=String(cityInput.value||'').trim().replace(/\s+/g,' ');
+      if(!name){setError('Escriba el nombre o código del ambiente.');nameInput.focus();return;}
+      if(!municipio){setError('Indique el municipio del ambiente.');cityInput.focus();return;}
+      if(name.length>80||municipio.length>70){setError('Revise la longitud de los campos.');return;}
+      if(name.includes('|')){setError('El nombre del ambiente no puede contener el carácter |.');nameInput.focus();return;}
+      if((planner.envs||[]).some(x=>envNameKey(x.name)===envNameKey(name) && (!originName || envNameKey(x.name)!==envNameKey(originName)))){
+        setError('Ya existe un ambiente con ese nombre o código.');nameInput.focus();return;
+      }
+      if(originName){
+        const env=(planner.envs||[]).find(x=>envNameKey(x.name)===envNameKey(originName));
+        if(!env){setError('No se encontró el ambiente original.');return;}
+        const affected=affectedFichasForEnvironment(originName);
+        const wasRenamed=env.name!==name;
+        if(affected.length && (wasRenamed || env.municipio!==municipio) &&
+          !confirm(`Este ambiente tiene ${affected.length} ficha(s) asignada(s).\n\n¿Guardar los cambios? Las fichas mantendrán sus jornadas y pasarán a "${name}".`))return;
+        if(wasRenamed){
+          for(const f of affected){const a=planner.assignments.get(f);if(a){a.ambiente=name;planner.assignments.set(f,a);}}
+          const notes=new Map();
+          for(const [k,v] of planner.notes.entries()) notes.set(k.startsWith(`drop|${originName}|`)?`drop|${name}|${k.slice(`drop|${originName}|`.length)}`:k,v);
+          planner.notes=notes;
+        }
+        env.name=name;env.municipio=municipio;
+        syncEnvironmentCollection('edición de ambiente');
+        if(feedback)feedback.textContent=`Se actualizó ${name} (${municipio}) sin perder asignaciones ni notas.`;
+      } else {
+        planner.envs.push({name,municipio});
+        syncEnvironmentCollection('nuevo ambiente');
+        if(feedback)feedback.textContent=`Se agregó ${name} en ${municipio}.`;
+      }
+      close();
+    });
+  }
 
   function clearPlannerAssignments(){
     planner.assignments.clear();
@@ -4118,12 +4439,53 @@ function assignFichaToActiveDrop(f){
     return (k4 && map[k4]) ? map[k4] : '';
   }
 
+
+  const plannerGridFilter = { municipio: '', query: '' };
+
+  function getVisiblePlannerEnvs(){
+    const city = normU(plannerGridFilter.municipio);
+    const query = normU(plannerGridFilter.query);
+    return (planner.envs||[]).filter(e=>
+      (!city || (city==='__SIN_MUNICIPIO__' ? !String(e.municipio||'').trim() : normU(e.municipio)===city)) &&
+      (!query || normU(e.name).includes(query))
+    );
+  }
+
+  function syncPlannerGridFilters(){
+    const select=document.getElementById('plannerGridMunicipio');
+    const search=document.getElementById('plannerGridSearch');
+    const count=document.getElementById('plannerGridCount');
+    if(select){
+      const cities=[...new Set((planner.envs||[]).map(e=>String(e.municipio||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+      const selected=plannerGridFilter.municipio;
+      select.replaceChildren(new Option('Todos los municipios',''),
+        ...(planner.envs||[]).some(e=>!String(e.municipio||'').trim())?[new Option('Sin municipio','__SIN_MUNICIPIO__')]:[],
+        ...cities.map(c=>new Option(c,c)));
+      if([...select.options].some(o=>o.value===selected)) select.value=selected;
+      else {select.value='';plannerGridFilter.municipio='';}
+    }
+    if(search && search.value!==plannerGridFilter.query) search.value=plannerGridFilter.query;
+    const visible=getVisiblePlannerEnvs().length;
+    const total=(planner.envs||[]).length;
+    if(count) count.textContent=`Mostrando ${visible} de ${total} ambiente(s)`;
+  }
+
+  function initPlannerGridFilters(){
+    const city=document.getElementById('plannerGridMunicipio');
+    const search=document.getElementById('plannerGridSearch');
+    const clear=document.getElementById('plannerGridClear');
+    if(city) city.addEventListener('change',()=>{plannerGridFilter.municipio=city.value;renderPlannerGrid();markEmptyEnvsForPrint();});
+    if(search) search.addEventListener('input',debounce(()=>{plannerGridFilter.query=search.value;renderPlannerGrid();markEmptyEnvsForPrint();},170));
+    if(clear) clear.addEventListener('click',()=>{plannerGridFilter.municipio='';plannerGridFilter.query='';renderPlannerGrid();markEmptyEnvsForPrint();});
+  }
+
 function updatePlannerSidePanel(){
     // Env list
     if($plannerEnvList){
       const items = (planner.envs||[]).map(e=>{
         const tag = envTag(e.name);
-        return `<div class="env-item"><span>${escapeHtml(e.name)}</span><span class="tag">${tag?`(${escapeHtml(tag)})`:''}</span></div>`;
+        const city = String(e.municipio||'').trim();
+        return `<div class="env-item"><div class="env-item-meta"><span class="env-item-name">${escapeHtml(e.name)}</span>${city ? `<span class="env-item-city">${escapeHtml(city)}</span>` : '<span class="env-item-city">Sin municipio</span>'}</div><div class="env-item-actions"><button type="button" data-env-action="edit" data-env-name="${escapeHtml(e.name)}" title="Editar ambiente ${escapeHtml(e.name)}" aria-label="Editar ambiente ${escapeHtml(e.name)}">Editar</button><button class="env-delete" type="button" data-env-action="delete" data-env-name="${escapeHtml(e.name)}" title="Eliminar ambiente ${escapeHtml(e.name)}" aria-label="Eliminar ambiente ${escapeHtml(e.name)}">Eliminar</button></div></div>`;
       }).join('');
       $plannerEnvList.innerHTML = items || '<div class="hint">Sin ambientes.</div>';
     }
@@ -4171,7 +4533,8 @@ function updatePlannerSidePanel(){
   }
 
 function renderPlannerGrid(){
-    const envs = planner.envs;
+    syncPlannerGridFilters();
+    const envs = getVisiblePlannerEnvs();
 
     const head = `
       <div class="pl-grid-head">
@@ -4195,7 +4558,7 @@ function renderPlannerGrid(){
 
       return `
         <div class="pl-grid-row" data-env="${escapeHtml(a)}">
-          <div class="lab">${escapeHtml(a)}</div>
+          <div class="lab"><span>${escapeHtml(a)}</span>${env.municipio ? `<span class="pl-env-city">${escapeHtml(env.municipio)}</span>` : ''}</div>
           ${makeCell('Mañana')}
           ${makeCell('Tarde')}
           ${makeCell('Noche')}
@@ -4631,277 +4994,407 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
     savePlannerLocal('cambio de ambientes');
   }
 
-  // ---------- Export / Import (Excel HTML) ----------
+
+  // ======================= Exportaciones 100% locales =======================
+  // .xlsx: OOXML generado en el navegador + ZIP (método STORE, sin librerías).
+  // .pdf: vectorial A4 apaisado, en páginas, sin html2canvas ni jsPDF.
+
+  function offlineDownload(blob, filename){
+    const link=document.createElement('a');
+    const url=URL.createObjectURL(blob);
+    link.href=url;link.download=filename;
+    document.body.appendChild(link);link.click();link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),3000);
+  }
+  function offlineZipStore(entries){
+    const encoder=new TextEncoder();
+    const u16=n=>Uint8Array.of(n&255,(n>>>8)&255);
+    const u32=n=>Uint8Array.of(n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255);
+    const crcTable=new Uint32Array(256);
+    for(let n=0;n<256;n++){
+      let c=n;
+      for(let j=0;j<8;j++) c=c&1 ? (0xEDB88320^(c>>>1)) : (c>>>1);
+      crcTable[n]=c>>>0;
+    }
+    const crc32=data=>{
+      let c=0xFFFFFFFF;
+      for(let i=0;i<data.length;i++)c=crcTable[(c^data[i])&255]^(c>>>8);
+      return (c^0xFFFFFFFF)>>>0;
+    };
+    const locals=[];const centrals=[];let offset=0;
+    const join=(arrays)=>{
+      const len=arrays.reduce((n,a)=>n+a.length,0);
+      const out=new Uint8Array(len);let k=0;
+      for(const a of arrays){out.set(a,k);k+=a.length;}
+      return out;
+    };
+    for(const entry of entries){
+      const name=encoder.encode(entry.name);
+      const data=typeof entry.text==='string'?encoder.encode(entry.text):entry.data;
+      if(!data||name.length>65535) throw new Error('Archivo interno del Excel inválido.');
+      const crc=crc32(data);
+      const local=join([Uint8Array.of(0x50,0x4b,0x03,0x04),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),name,data]);
+      locals.push(local);
+      const central=join([Uint8Array.of(0x50,0x4b,0x01,0x02),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset),name]);
+      centrals.push(central);offset+=local.length;
+    }
+    if(entries.length>65535)throw new Error('Demasiados archivos internos para Excel.');
+    const centralBytes=centrals.reduce((n,a)=>n+a.length,0);
+    const tail=join([Uint8Array.of(0x50,0x4b,0x05,0x06),u16(0),u16(0),u16(entries.length),u16(entries.length),u32(centralBytes),u32(offset),u16(0)]);
+    return join([...locals,...centrals,tail]);
+  }
+  function offlineXmlEscape(value){
+    return String(value??'')
+      .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+  }
+  function offlineCellRef(col,row){
+    let s='';for(let i=col+1;i>0;i=Math.floor((i-1)/26))s=String.fromCharCode(65+(i-1)%26)+s;
+    return s+row;
+  }
+  function offlineWorksheet(aoa, widths){
+    const rows=[];
+    for(let r=0;r<aoa.length;r++){
+      const data=aoa[r]||[];
+      const maxLines=Math.max(1,...data.map(v=>String(v??'').split(/\r?\n/).length));
+      const rowHt=r===0?29:Math.min(200,Math.max(24,12*maxLines+12));
+      let cells='';
+      for(let c=0;c<data.length;c++){
+        const val=String(data[c]??'');
+        const style=r===0?2:1;
+        cells+=`<c r="${offlineCellRef(c,r+1)}" s="${style}" t="inlineStr"><is><t xml:space="preserve">${offlineXmlEscape(val)}</t></is></c>`;
+      }
+      rows.push(`<row r="${r+1}" ht="${rowHt}" customHeight="1">${cells}</row>`);
+    }
+    const cols=widths.map((w,i)=>`<col min="${i+1}" max="${i+1}" width="${w}" customWidth="1"/>`).join('');
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><dimension ref="A1:${offlineCellRef(Math.max(0,widths.length-1),Math.max(1,aoa.length))}"/><sheetViews><sheetView workbookViewId="0"/></sheetViews><cols>${cols}</cols><sheetData>${rows.join('')}</sheetData></worksheet>`;
+  }
+  function offlineWorkbook(sheets){
+    const sheetNames=sheets.map(s=>s.name);
+    const sheetDefs=sheetNames.map((name,i)=>`<sheet name="${offlineXmlEscape(name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('');
+    const wb=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheetDefs}</sheets></workbook>`;
+    const rels=sheets.map((s,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join('')+
+      `<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>`;
+    const wbRels=`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${rels}</Relationships>`;
+    const baseRels='<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>';
+    const styles=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF2E7D00"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"><color rgb="FFE2E8F0"/></left><right style="thin"><color rgb="FFE2E8F0"/></right><top style="thin"><color rgb="FFE2E8F0"/></top><bottom style="thin"><color rgb="FFE2E8F0"/></bottom><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf><xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+    const contentTypes=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${sheets.map((s,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>`;
+    const entries=[{name:'[Content_Types].xml',text:contentTypes},{name:'_rels/.rels',text:baseRels},{name:'xl/workbook.xml',text:wb},{name:'xl/_rels/workbook.xml.rels',text:wbRels},{name:'xl/styles.xml',text:styles}];
+    for(let i=0;i<sheets.length;i++)entries.push({name:`xl/worksheets/sheet${i+1}.xml`,text:offlineWorksheet(sheets[i].rows,sheets[i].widths)});
+    return offlineZipStore(entries);
+  }
+
+  function plannerCellAssignments(ambiente,jornada){
+    const out=[];
+    for(const [f,asg] of planner.assignments.entries()){
+      if(envNameKey(asg?.ambiente)!==envNameKey(ambiente))continue;
+      const prog=asignProgramaFor(f,asg);
+      if(isGuianzaPrograma(prog)){
+        if(jornada==='Mañana' && asg.guianzaManana!==false)out.push({f,asg});
+        else if(jornada==='Tarde' && (asg.guianzaTarde===true || (asg.guianzaTarde!==false && !!asg.bothMT)))out.push({f,asg});
+      } else if(canonJornada(asg.jornada)===jornada)out.push({f,asg});
+    }
+    return out;
+  }
+  function plannerTextForFicha(f,asg){
+    const r=rowAnyForFicha(f)||{};
+    const prog=String(asg.programa||progName(r)||'Programa sin nombre');
+    const resp=String(asg.responsable||respName(r)||'Sin responsable');
+    const ini=asg.ini||r.FECHA_INICIO_FICHA||'';
+    const fin=asg.fin||r.FECHA_FIN_ETAPA_LECTIVA||'';
+    const extra=asg.sabadoTurno?` · Sáb ${String(asg.sabadoTurno).toUpperCase()}`:'';
+    const dia=asg.diaSemana?` · Día ${asg.diaSemana}`:'';
+    return `${prog} - ${f}${warnForFicha(f)?' *':''}\n${resp}\nInicio ${ini}  Finaliza ${fin}${extra}${dia}`;
+  }
+  function plannerCellText(ambiente,jornada){
+    const assigned=plannerCellAssignments(ambiente,jornada);
+    const note=planner.notes?.get(`drop|${ambiente}|${jornada}`)||'';
+    return assigned.map(({f,asg})=>plannerTextForFicha(f,asg)).concat(note?[`Nota: ${note}`]:[]).join('\n\n');
+  }
+
   function exportPlannerExcel(){
-    if(typeof XLSX === 'undefined'){
-      alert('No se pudo cargar XLSX (SheetJS).');
-      return;
-    }
-
-    const srcRows = (planner.sourceRows && planner.sourceRows.length) ? planner.sourceRows : (allRows || []);
-    const byFicha = new Map(srcRows.map(r => [fichaKey(r), r]));
-
-    // Mapa ambiente+jornada -> fichas
-    const cellMap = new Map();
-    const pushCell = (key, ficha)=>{
-      if(!cellMap.has(key)) cellMap.set(key, []);
-      cellMap.get(key).push(ficha);
-    };
-    for(const [f, asg] of planner.assignments.entries()){
-      if(!asg || !asg.ambiente || !asg.jornada) continue;
-      const prog = String(asg.programa || asg.PROGRAMA_FORMACION || asg.PROGRAMA || '');
-      const isGuianza = isGuianzaPrograma(prog);
-      const hasManana = isGuianza ? (asg.guianzaManana === false ? false : true) : false;
-      const hasTarde = isGuianza ? (asg.guianzaTarde === false ? false : (asg.guianzaTarde === true ? true : !!asg.bothMT)) : false;
-      if(isGuianza){
-        if(hasManana) pushCell(`${asg.ambiente}||Mañana`, f);
-        if(hasTarde) pushCell(`${asg.ambiente}||Tarde`, f);
-        if(!hasManana && !hasTarde) pushCell(`${asg.ambiente}||Mañana`, f);
-      } else {
-        pushCell(`${asg.ambiente}||${canonJornada(asg.jornada)}`, f);
-      }
-    }
-
-    const getBlockText = (f)=>{
-      const r = byFicha.get(f) || {};
-      const programa = progName(r) || (r.PROGRAMA_FORMACION||r.PROGRAMA||'');
-      const ini = r.FECHA_INICIO_FICHA || r.INICIO_FICHA || '';
-      const fin = r.FECHA_FIN_ETAPA_LECTIVA || r.FIN_ETAPA_LECTIVA || '';
-      const prev = planner.assignments.get(f) || {};
-      const resp = (prev.responsable || respName(r) || '').trim();
-      const sab = prev.sabadoTurno ? ` Sáb ${String(prev.sabadoTurno).trim().toUpperCase()}` : '';
-      const warn = warnForFicha(f);
-      return [
-        `${programa} - ${f}${warn ? ' *' : ''}`,
-        `${resp}`,
-        `Inicio ${ini} Finaliza ${fin}${sab}`
-      ].join('\n');
-    };
-
-    const envs = (planner.envs && planner.envs.length) ? planner.envs.map(e=>e.name) : [];
-
-    // Hoja PLAN (cuadrícula)
-    const planAOA = [];
-    planAOA.push(['Ambientes','Mañana','Tarde','Noche']);
-    for(const a of envs){
-      const row = [a];
-      for(const j of ['Mañana','Tarde','Noche']){
-        const fs = cellMap.get(`${a}||${j}`) || [];
-        row.push(fs.length ? fs.map(getBlockText).join('\n\n') : '');
-      }
-      planAOA.push(row);
-    }
-
-    // Hoja AMBIENTES
-    const envAOA = [['Ambiente'], ...envs.map(x=>[x])];
-
-    const wb = XLSX.utils.book_new();
-    const wsPlan = XLSX.utils.aoa_to_sheet(planAOA);
-    // Formato hoja PLAN: columnas anchas, texto ajustado, centrado horizontal y vertical
-    wsPlan['!cols'] = [ { wch: 22 }, { wch: 45 }, { wch: 45 }, { wch: 45 } ];
-
-    // Ajuste de alto de filas (simulación de autofit según líneas)
-    // Excel no recalcula autofit automáticamente al abrir cuando se genera el archivo, así que lo aproximamos.
-    const rowsHeights = [];
-    rowsHeights[0] = { hpt: 18 };
-    for(let r=1; r<planAOA.length; r++){
-      const a = planAOA[r] || [];
-      let maxLines = 1;
-      for(let c=1; c<=3; c++){
-        const v = String(a[c] ?? '').trim();
-        if(!v) continue;
-        const lines = v.split(/\r?\n/).length;
-        if(lines > maxLines) maxLines = lines;
-      }
-      // 15pt por línea + un pequeño margen
-      rowsHeights[r] = { hpt: Math.min(120, 15*maxLines + 10) };
-    }
-    wsPlan['!rows'] = rowsHeights;
     try{
-      const planRef = wsPlan['!ref'] || 'A1:D1';
-      const rng = XLSX.utils.decode_range(planRef);
-      for(let R=rng.s.r; R<=rng.e.r; R++){
-        for(let C=rng.s.c; C<=rng.e.c; C++){
-          const addr = XLSX.utils.encode_cell({r:R,c:C});
-          const cell = wsPlan[addr];
-          if(!cell) continue;
-          cell.s = cell.s || {};
-          cell.s.alignment = { horizontal:'center', vertical:'center', wrapText:true };
-          cell.s.border = {
-            top:    { style:'thin' },
-            bottom: { style:'thin' },
-            left:   { style:'thin' },
-            right:  { style:'thin' }
-          };
-          if(R === 0){
-            cell.s.font = { bold:true };
+      const envs=getVisiblePlannerEnvs();
+      if(!envs.length){alert('No hay ambientes que coincidan con los filtros.');return;}
+      const plan=[['Ambientes','Mañana','Tarde','Noche']];
+      const environments=[['Ambiente','Municipio']];
+      const observations=[['Ambiente','Municipio','Jornada','Nota']];
+      const assignments=[['Ficha','Ambiente','Municipio','Jornada','Programa','Responsable','Inicio','Fin','Sábado','Día','Estado PE04']];
+      const cities=new Map(envs.map(e=>[envNameKey(e.name),e.municipio||'']));
+      for(const e of envs){
+        plan.push([e.name,...['Mañana','Tarde','Noche'].map(j=>plannerCellText(e.name,j))]);
+        environments.push([e.name,e.municipio||'']);
+        for(const j of ['Mañana','Tarde','Noche']){
+          const note=planner.notes?.get(`drop|${e.name}|${j}`)||'';
+          if(note)observations.push([e.name,e.municipio||'',j,note]);
+        }
+      }
+      for(const [f,a] of planner.assignments.entries()){
+        if(!cities.has(envNameKey(a.ambiente)))continue;
+        const r=rowAnyForFicha(f)||{};
+        assignments.push([f,a.ambiente,cities.get(envNameKey(a.ambiente)),a.jornada,a.programa||progName(r),a.responsable||respName(r),a.ini||r.FECHA_INICIO_FICHA||'',a.fin||r.FECHA_FIN_ETAPA_LECTIVA||'',a.sabadoTurno||'',a.diaSemana||'',a.missingPE04?'No existe en PE04':'Registrada']);
+      }
+      const bytes=offlineWorkbook([
+        {name:'PLAN',rows:plan,widths:[25,55,55,55]},
+        {name:'AMBIENTES',rows:environments,widths:[30,28]},
+        {name:'ASIGNACIONES',rows:assignments,widths:[16,25,25,18,48,34,16,16,12,12,19]},
+        {name:'OBSERVACIONES',rows:observations,widths:[25,25,16,75]}
+      ]);
+      offlineDownload(new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),`planificador_ambientes_${new Date().toISOString().slice(0,10)}.xlsx`);
+    }catch(e){console.error(e);alert('No fue posible exportar Excel: '+(e.message||String(e)));}
+  }
+
+  function pdfWinAnsiHex(txt){
+    // Helvetica WinAnsi permite tildes españolas y ñ sin fuentes remotas.
+    const extra={8364:128,8218:130,402:131,8222:132,8230:133,8224:134,8225:135,710:136,8240:137,352:138,8249:139,338:140,381:142,8216:145,8217:146,8220:147,8221:148,8226:149,8211:150,8212:151,732:152,8482:153,353:154,8250:155,339:156,382:158,376:159};
+    const hex=[];
+    for(const s of String(txt??'').normalize('NFC')){
+      const code=s.codePointAt(0);
+      let b=code<=255?code:extra[code];
+      if(b===undefined)b=code===0x2192?45:63;
+      if(b<32 && b!==9)b=32;
+      hex.push(b.toString(16).padStart(2,'0'));
+    }
+    return `<${hex.join('')}>`;
+  }
+  function pdfWrap(str,chars){
+    const lines=[];
+    for(const raw of String(str||'').replace(/\r/g,'').split('\n')){
+      const words=raw.trim().split(/\s+/).filter(Boolean);
+      if(!words.length){lines.push('');continue;}
+      let line='';
+      for(let word of words){
+        while(word.length>chars){
+          if(line){lines.push(line);line='';}
+          lines.push(word.slice(0,chars));word=word.slice(chars);
+        }
+        if((line?line.length+1:0)+word.length>chars){lines.push(line);line=word;}
+        else line+=line?' '+word:word;
+      }
+      lines.push(line);
+    }
+    return lines;
+  }
+  function pdfColorForCell(assignments){
+    if(assignments.some(x=>x.asg.missingPE04))return {fill:[.06,.07,.1],text:[1,1,1]};
+    let priority=0;
+    for(const {f,asg} of assignments){
+      const r=rowAnyForFicha(f);
+      const status=(r ? fichaStatusClassFromRow(r) : '') || (asg.warn90?'pl-close-red':'pl-default-blue');
+      const n={'pl-default-blue':1,'pl-start-green':2,'pl-close-orange':3,'pl-close-red':4}[status]||1;
+      priority=Math.max(priority,n);
+    }
+    if(priority===4)return {fill:[1,.79,.79],text:[.14,.16,.2]};
+    if(priority===3)return {fill:[.99,.89,.57],text:[.14,.16,.2]};
+    if(priority===2)return {fill:[.77,.95,.82],text:[.14,.16,.2]};
+    if(priority===1)return {fill:[.81,.9,1],text:[.14,.16,.2]};
+    return {fill:[1,1,1],text:[.14,.16,.2]};
+  }
+  function offlinePdfFromPages(streams){
+    const W=841.89,H=595.28;
+    const objects=[];
+    objects[1]='<< /Type /Catalog /Pages 2 0 R >>';
+    objects[3]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>';
+    objects[4]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>';
+    const ids=[];
+    let next=5;
+    for(const stream of streams){
+      const pageId=next++,contentId=next++;
+      ids.push(pageId);
+      objects[pageId]=`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${contentId} 0 R >>`;
+      objects[contentId]=`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
+    }
+    objects[2]=`<< /Type /Pages /Kids [${ids.map(x=>x+' 0 R').join(' ')}] /Count ${ids.length} >>`;
+    let body='%PDF-1.4\n%Offline planificador\n';
+    const offsets=[0];
+    for(let i=1;i<objects.length;i++){
+      offsets[i]=body.length;
+      body+=`${i} 0 obj\n${objects[i]}\nendobj\n`;
+    }
+    const start=body.length;
+    body+=`xref\n0 ${objects.length}\n0000000000 65535 f \n`;
+    for(let i=1;i<objects.length;i++)body+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+    body+=`trailer\n<< /Size ${objects.length} /Root 1 0 R >>\nstartxref\n${start}\n%%EOF`;
+    return new Blob([body],{type:'application/pdf'});
+  }
+  function exportPlannerPDF(){
+    try{
+      const envs=getVisiblePlannerEnvs().filter(e=>[...planner.assignments.values()].some(a=>envNameKey(a?.ambiente)===envNameKey(e.name)));
+      if(!envs.length){alert('No hay ambientes con fichas asignadas dentro del filtro actual.');return;}
+      const W=841.89,H=595.28,margin=28;
+      const cols=[110,225,225,225],x=[margin,margin+110,margin+335,margin+560];
+      const titleSource=(document.getElementById('currentSourceInfo')?.textContent||'Reporte PE-04').replace(/[\x00-\x1f]/g,' ');
+      const pageStreams=[];let ops=[];let y=0;
+      const rgb=(a)=>`${a[0]} ${a[1]} ${a[2]}`;
+      const rect=(px,top,w,h,color,border)=>{
+        if(color)ops.push(`${rgb(color)} rg ${px.toFixed(2)} ${(H-top-h).toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re f`);
+        if(border)ops.push(`${rgb(border)} RG 0.4 w ${px.toFixed(2)} ${(H-top-h).toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re S`);
+      };
+      const txt=(px,baseline,value,size=8,bold=false,color=[.12,.16,.23])=>{
+        if(!value)return;
+        ops.push(`${rgb(color)} rg BT /${bold?'F2':'F1'} ${size} Tf 1 0 0 1 ${px.toFixed(2)} ${(H-baseline).toFixed(2)} Tm ${pdfWinAnsiHex(value)} Tj ET`);
+      };
+      const startPage=()=>{
+        ops=[];
+        rect(0,0,W,H,[1,1,1]);
+        rect(margin,20,4,46,[.22,.66,0]);
+        txt(margin+14,37,'SENA  |  PROGRAMACIÓN DE AMBIENTES',15,true,[.16,.4,.07]);
+        txt(margin+14,52,'Ambientes de aprendizaje - jornada Mañana / Tarde / Noche',9,false);
+        txt(margin,71,`Fecha: ${new Date().toLocaleDateString('es-CO')}   ·   Municipio: ${plannerGridFilter.municipio||'Todos'}   ·   Búsqueda: ${plannerGridFilter.query||'Todas'}`,8,false,[.35,.4,.48]);
+        txt(margin,83,titleSource.slice(0,130),7.5,false,[.35,.4,.48]);
+        rect(margin,98,W-2*margin,26,[.18,.49,0]);
+        ['AMBIENTE','MAÑANA (L-V)','TARDE (L-V)','NOCHE (L-V + SÁB)'].forEach((v,i)=>txt(x[i]+8,115,v,9,true,[1,1,1]));
+        y=124;
+      };
+      const finishPage=()=>{
+        txt(margin,574,'Generado localmente; no requiere conexión a internet.',7,false,[.40,.46,.53]);
+        txt(W-margin-65,574,`Página ${pageStreams.length+1}`,7,false,[.40,.46,.53]);
+        pageStreams.push(ops.join('\n')+'\n');
+      };
+      startPage();
+      for(const env of envs){
+        const colData=['Mañana','Tarde','Noche'].map(j=>{
+          const asgs=plannerCellAssignments(env.name,j);
+          const note=planner.notes?.get(`drop|${env.name}|${j}`)||'';
+          const lines=[];
+          asgs.forEach(({f,asg},idx)=>{
+            if(idx)lines.push('');
+            lines.push(...pdfWrap(plannerTextForFicha(f,asg),55));
+          });
+          if(note){if(lines.length)lines.push('');lines.push(...pdfWrap('NOTA: '+note,55));}
+          return {lines,color:pdfColorForCell(asgs)};
+        });
+        const rowLines=Math.max(1,...colData.map(c=>c.lines.length));
+        let begin=0;
+        while(begin<rowLines){
+          let capacity=Math.floor((550-y-15)/10.6);
+          if(capacity<3){finishPage();startPage();capacity=Math.floor((550-y-15)/10.6);}
+          const take=Math.min(capacity,rowLines-begin);
+          const h=Math.max(35,16+take*10.6);
+          rect(x[0],y,cols[0],h,[.95,.97,.95],[.75,.8,.75]);
+          txt(x[0]+8,y+17,begin?`${env.name} (cont.)`:env.name,9,true);
+          if(!begin && env.municipio)txt(x[0]+8,y+31,env.municipio.slice(0,25),7.3,false,[.30,.36,.4]);
+          for(let c=0;c<3;c++){
+            const segment=colData[c].lines.slice(begin,begin+take);
+            const cc=colData[c].color;
+            rect(x[c+1],y,cols[c+1],h,cc.fill,[.75,.8,.75]);
+            for(let li=0;li<segment.length;li++)txt(x[c+1]+7,y+14+li*10.6,segment[li],7.4,li===0 && begin===0,cc.text);
           }
+          y+=h;
+          begin+=take;
+          if(y>525 && (begin<rowLines || env!==envs[envs.length-1])){finishPage();startPage();}
         }
       }
-    }catch(e){ /* estilos no soportados en algunas builds */ }
-    XLSX.utils.book_append_sheet(wb, wsPlan, 'PLAN');
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(envAOA), 'AMBIENTES');
-
-    const fname = `planificador_${new Date().toISOString().slice(0,10)}.xlsx`;
-    XLSX.writeFile(wb, fname);
+      finishPage();
+      offlineDownload(offlinePdfFromPages(pageStreams),`programacion_ambientes_${new Date().toISOString().slice(0,10)}.pdf`);
+    }catch(e){console.error(e);alert('No fue posible generar el PDF: '+(e.message||String(e)));}
   }
 
-  async function exportPlannerPDF(){
-    // Exportación directa a PDF (sin diálogo de impresión), usando html2canvas + jsPDF.
-    // Requerimiento: 1-2 hojas, sin espacio grande arriba, sin X de borrar, sin controles.
-    ensurePlannerVisible();
-    renderPlannerGrid();
-    markEmptyEnvsForPrint();
-    savePlannerLocal('cambio de ambientes'); // marca filas vacías como print-hide
-
-    const panel = document.getElementById('plannerGridPanel');
-    if(!panel){ alert('No se encontró el panel de cuadrícula.'); return; }
-    if(typeof html2canvas==='undefined' || !window.jspdf || !window.jspdf.jsPDF){
-      alert('No se pudieron cargar las librerías de PDF (html2canvas/jsPDF). Verifique su conexión y recargue.');
-      return;
+  // Respaldo JSON: portátil, restaurable y distinto de la exportación Excel.
+  function exportPlannerBackup(){
+    const snapshot={
+      type:'sena-ambientes-backup',version:2,
+      createdAt:new Date().toISOString(),
+      planner:{...serializePlanner(),sourceRows:planner.sourceRows||[]},
+      report:{
+        source:document.getElementById('currentSourceInfo')?.textContent||'',
+        allRows:Array.isArray(allRows)?allRows:[],
+        filters:{
+          ...Object.fromEntries(Object.entries(filters).filter(([k,v])=>!(v instanceof Set))),
+          modalidad:[...filters.modalidad],especial:[...filters.especial],municipios:[...filters.municipios],programa:[...filters.programa]
+        },
+        sort:{...sortState}
+      },
+      interface:{municipio:plannerGridFilter.municipio,query:plannerGridFilter.query}
+    };
+    offlineDownload(new Blob([JSON.stringify(snapshot,null,2)],{type:'application/json;charset=utf-8'}),`respaldo_planificador_${new Date().toISOString().slice(0,10)}.json`);
+  }
+  function validatePlannerBackup(data){
+    if(!data || data.type!=='sena-ambientes-backup' || data.version!==2)throw new Error('No es un respaldo compatible de este planificador (versión 2).');
+    if(!data.planner || !Array.isArray(data.planner.envs) || !Array.isArray(data.planner.assignments) || !Array.isArray(data.planner.notes))throw new Error('El respaldo no contiene todos los datos del planificador.');
+    if(data.planner.envs.length>5000 || data.planner.assignments.length>50000 || data.planner.notes.length>100000)throw new Error('El archivo excede los límites de seguridad.');
+    if(!data.report || !Array.isArray(data.report.allRows) || data.report.allRows.length>100000)throw new Error('Datos del reporte inválidos.');
+    const names=new Set();
+    for(const e of data.planner.envs){
+      if(!e||typeof e.name!=='string'||e.name.trim().length>80 || typeof e.municipio!=='string'||e.municipio.length>70)throw new Error('El respaldo contiene ambientes inválidos.');
+      const k=envNameKey(e.name);
+      if(!k || names.has(k))throw new Error('El respaldo contiene ambientes duplicados o vacíos.');
+      names.add(k);
     }
-
-    // Determinar ambientes usados (para omitir vacíos)
-    const used = new Set();
-    for(const asg of (planner.assignments||new Map()).values()){
-      if(asg && asg.ambiente) used.add(String(asg.ambiente));
+    for(const a of data.planner.assignments){
+      if(!a || !String(a.ficha||'').trim() || typeof a.ambiente!=='string')throw new Error('El respaldo contiene asignaciones inválidas.');
     }
-
-    // Filas visibles (solo ambientes con asignación)
-    const visibleRows = Array.from(panel.querySelectorAll('.pl-grid-row'))
-      .filter(r => {
-        const env = r.getAttribute('data-env') || '';
-        return env && used.has(env);
+    return true;
+  }
+  function hydrateBackup(data){
+    const snap=data.planner;
+    // La importación está validada; recién ahora se reemplaza el estado actual.
+    allRows=data.report.allRows.slice();
+    bumpDataVersion();
+    municipalities=[...new Set(allRows.map(r=>norm(r.NOMBRE_MUNICIPIO_CURSO)).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+    centrosFormacion=[...new Set(allRows.map(r=>norm(r.NOMBRE_CENTRO)).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+    programasFormacion=buildOrderedProgramList(allRows);
+    const savedFilters=data.report.filters||{};
+    for(const key of ['modalidad','especial','municipios','programa'])filters[key]=new Set(Array.isArray(savedFilters[key])?savedFilters[key]:[]);
+    for(const key of ['modalidadAll','especialAll','muniAll','programaAll'])filters[key]=typeof savedFilters[key]==='boolean'?savedFilters[key]:true;
+    filters.centro=String(savedFilters.centro||'');filters.q=String(savedFilters.q||'');
+    sortState.key=data.report.sort?.key||null;sortState.dir=data.report.sort?.dir==='desc'?'desc':'asc';
+    const centro=document.getElementById('centroSel');
+    if(centro){
+      centro.replaceChildren(new Option('Todos los centros',''),...centrosFormacion.map(s=>new Option(s,s)));
+      centro.value=centrosFormacion.includes(filters.centro)?filters.centro:'';
+      centro.disabled=centrosFormacion.length===1;
+    }
+    if($q)$q.value=filters.q;
+    if($qTop)$qTop.value=filters.q;
+    if($modalidadSwitch)$modalidadSwitch.checked=filters.modalidadAll;
+    if($especialSwitch)$especialSwitch.checked=filters.especialAll;
+    if($muniSwitch)$muniSwitch.checked=filters.muniAll;
+    if($progSwitch)$progSwitch.checked=filters.programaAll;
+    viewRows=allRows.slice();
+    applyFilters();
+    if(!localStorage)throw new Error('Almacenamiento local no disponible.');
+    localStorage.setItem(PLANNER_AUTOSAVE_KEY,JSON.stringify(snap));
+    if(!restorePlannerLocal())throw new Error('No se pudo restaurar el planificador.');
+    planner.sourceRows=Array.isArray(snap.sourceRows)?snap.sourceRows.slice():normalizePlannerRows(allRows);
+    try{localStorage.setItem('planner_env_tag_map',snap.envTagsRaw||'');}catch(e){}
+    try{localStorage.setItem('planner_envs_text',snap.envText||planner.envs.map(x=>x.name).join('\n'));}catch(e){}
+    plannerGridFilter.municipio=String(data.interface?.municipio||'');
+    plannerGridFilter.query=String(data.interface?.query||'');
+    const source=data.report.source||'Copia de seguridad restaurada';
+    if(document.getElementById('currentSourceInfo'))document.getElementById('currentSourceInfo').textContent=source;
+    if(document.getElementById('uploadSummaryRight'))document.getElementById('uploadSummaryRight').textContent=source;
+    document.body.classList.remove('preload');
+    if($uploadCard)$uploadCard.style.display='none';
+    if($plannerCard)$plannerCard.style.display='block';
+    renderPlanner();
+    savePlannerLocal('restauración completa');
+    $plannerCard?.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function initPlannerBackups(){
+    const exp=document.getElementById('plannerBackupExport');
+    const imp=document.getElementById('plannerBackupImportBtn');
+    const picker=document.getElementById('plannerBackupImport');
+    if(exp)exp.addEventListener('click',exportPlannerBackup);
+    if(imp && picker)imp.addEventListener('click',()=>picker.click());
+    if(picker)picker.addEventListener('change',async e=>{
+      const file=e.target.files?.[0];e.target.value='';
+      if(!file)return;
+      if(file.size>35*1024*1024){alert('El respaldo supera el tamaño máximo de 35 MB.');return;}
+      let backup;
+      try{backup=JSON.parse(await file.text());validatePlannerBackup(backup);}
+      catch(err){alert('No se pudo leer el respaldo: '+(err.message||String(err)));return;}
+      const choice=await showChoiceModal({
+        title:'Restaurar copia de seguridad',
+        message:`Respaldo del ${new Date(backup.createdAt).toLocaleString('es-CO')}\n${backup.planner.envs.length} ambientes y ${backup.planner.assignments.length} asignaciones.\n\nLa restauración reemplazará los ambientes, fichas, asignaciones, notas y el reporte actuales. ¿Desea continuar?`,
+        options:[{label:'Cancelar',value:'cancel'},{label:'Restaurar y reemplazar',value:'restore',primary:true}]
       });
-
-    if(!visibleRows.length){
-      alert('No hay ambientes asignados para exportar.');
-      return;
-    }
-
-    // Particionar en páginas de 5 ambientes
-    const chunkSize = 5;
-    const chunks = [];
-    for(let i=0;i<visibleRows.length;i+=chunkSize){
-      chunks.push(visibleRows.slice(i,i+chunkSize).map(r=>r.getAttribute('data-env')));
-    }
-
-    // Contenedor fuera de pantalla
-    const host = document.createElement('div');
-    host.style.position = 'fixed';
-    host.style.left = '-99999px';
-    host.style.top = '0';
-    host.style.width = '1123px'; // aprox A4 landscape a 96dpi
-    host.style.background = '#fff';
-    document.body.appendChild(host);
-
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ orientation:'landscape', unit:'pt', format:'a4' });
-    const pageW = pdf.internal.pageSize.getWidth();
-    const pageH = pdf.internal.pageSize.getHeight();
-
-    // Usar el logo embebido del header principal (evita CORS / faltantes en PDF)
-    const embeddedLogo = (document.querySelector('header.site-header .logo img')||{}).src || '';
-
-    try{
-      for(let p=0;p<chunks.length;p++){
-        const envSet = new Set(chunks[p]);
-
-        // Clonar panel y dejar solo las filas de esta página
-        const clone = panel.cloneNode(true);
-
-      // UI: ocultar título de cuadrícula en PDF (no afecta la vista normal)
-      try{
-        const h = clone.querySelector('.pl-panel-h');
-        if(h && /Cuadrícula\s*\(/i.test(h.textContent||'')) h.remove();
-      }catch(e){}
-        clone.id = `plannerGridPanelClone_${p+1}`;
-        clone.classList.add('pdf-capture');
-        clone.style.boxShadow = 'none';
-        clone.style.margin = '0';
-        clone.style.maxWidth = 'none';
-
-        // Header PDF visible y con logo embebido
-        const pdfHeader = clone.querySelector('.pdf-header');
-        if(pdfHeader) pdfHeader.style.display = 'flex';
-        const pdfLogo = clone.querySelector('.pdf-header img');
-        if(pdfLogo && embeddedLogo) pdfLogo.setAttribute('src', embeddedLogo);
-
-        // Expandir para que no dependa del scroll
-        const wrap = clone.querySelector('.pl-gridWrap');
-        if(wrap){
-          wrap.style.maxHeight = 'none';
-          wrap.style.overflow = 'visible';
-          wrap.style.border = 'none';
-          wrap.style.width = '100%';
-        }
-
-        const grid = clone.querySelector('.pl-grid');
-        if(grid){
-          grid.style.width = '100%';
-          grid.style.minWidth = '0';
-        }
-
-        // Ocultar elementos no deseados (X, selects, hints)
-        clone.querySelectorAll('.xremove, select, .pl-pop, .pl-drop-hint').forEach(el=>{ el.style.display='none'; });
-
-        // Ajuste de columnas para eliminar espacio en blanco a la derecha
-        clone.querySelectorAll('.pl-grid-head, .pl-grid-row').forEach(el=>{
-          el.style.gridTemplateColumns = '80px repeat(3, minmax(0, 1fr))';
-        });
-
-        // Filtrar filas
-        clone.querySelectorAll('.pl-grid-row').forEach(row=>{
-          const env = row.getAttribute('data-env') || '';
-          if(env && !envSet.has(env)) row.remove();
-        });
-
-        host.appendChild(clone);
-
-        const canvas = await html2canvas(clone, { scale: 2, backgroundColor: '#ffffff', useCORS:true });
-        const imgData = canvas.toDataURL('image/png');
-
-        // Ajuste PDF: usar ~95% del ancho útil con márgenes homogéneos, sin distorsión
-        const imgW = canvas.width;
-        const imgH = canvas.height;
-
-        // Márgenes proporcionales (2.5% por lado => 95% de ancho útil)
-        const marginX = pageW * 0.025;
-        const marginY = marginX; // homogéneo
-
-        const targetW = pageW - (marginX * 2); // 95% del ancho
-        const targetH = pageH - (marginY * 2);
-
-        // Escala proporcional (un solo factor). Prioriza ancho, pero respeta altura.
-        const scaleW = targetW / imgW;
-        const scaleH = targetH / imgH;
-        const s = Math.min(scaleW, scaleH);
-
-        const drawW = imgW * s;
-        const drawH = imgH * s;
-
-        // Centrar horizontalmente para eliminar franja blanca (especialmente a la derecha)
-        const x = (pageW - drawW) / 2;
-        const y = marginY;
-
-        if(p>0) pdf.addPage();
-        pdf.addImage(imgData, 'PNG', x, y, drawW, drawH, undefined, 'FAST');
-
-        host.removeChild(clone);
-      }
-
-      const fname = `programacion_ambientes_${new Date().toISOString().slice(0,10)}.pdf`;
-      pdf.save(fname);
-    }catch(err){
-      console.error(err);
-      alert('No fue posible generar el PDF. Revise la consola para más detalle.');
-    }finally{
-      host.remove();
-    }
+      if(choice!=='restore')return;
+      try{hydrateBackup(backup);alert('Copia de seguridad restaurada correctamente.');}
+      catch(err){console.error(err);alert('No fue posible restaurar el respaldo: '+(err.message||String(err)));}
+    });
   }
-
-
-
 
   function setIssues(items){
     $plannerIssues.innerHTML = (items && items.length)
@@ -5102,7 +5595,7 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
         // Cargar envs (si existe hoja)
         if(envs && envs.length){
           incoming.envs = envs
-            .map(e => ({ name: String(e.Ambiente || e.AMBIENTE || e['Ambiente '] || '').trim() }))
+            .map(e => ({ name: String(e.Ambiente || e.AMBIENTE || e['Ambiente '] || '').trim(), municipio:String(e.Municipio||e.MUNICIPIO||'').trim() }))
             .filter(e => e.name);
         }
         // Cargar plan en mapa temporal
@@ -5221,11 +5714,16 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
 
           // Unir envs si vienen (sin duplicar)
           if(incoming.envs && incoming.envs.length){
-            const setE = new Set((planner.envs||[]).map(e=>e.name));
+            const setE = new Map((planner.envs||[]).map(e=>[envNameKey(e.name),e]));
             for(const e of incoming.envs){
-              if(e && e.name && !setE.has(e.name)){
-                planner.envs.push({ name:e.name });
-                setE.add(e.name);
+              if(!e || !e.name) continue;
+              const key = envNameKey(e.name);
+              if(!setE.has(key)){
+                const added = { name:e.name, municipio:e.municipio||'' };
+                planner.envs.push(added);
+                setE.set(key, added);
+              }else if(!setE.get(key).municipio && e.municipio){
+                setE.get(key).municipio = e.municipio;
               }
             }
             if($plannerEnvs) $plannerEnvs.value = planner.envs.map(e=>e.name).join("\n");
@@ -5361,7 +5859,7 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
     const envs = parsed[1] || [];
 
     // Cargar envs
-    planner.envs = envs.map(e => ({ name: e.Ambiente || e.AMBIENTE || '' })).filter(e=>e.name.trim());
+    planner.envs = envs.map(e => ({ name: e.Ambiente || e.AMBIENTE || '', municipio:e.Municipio||e.MUNICIPIO||'' })).filter(e=>e.name.trim());
     $plannerEnvs.value = planner.envs.map(e=>e.name).join("\n");
 
     // Modo importación: durante la importación, solo se usarán los datos presentes en el archivo
@@ -5425,7 +5923,7 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
     const envs = parseWs(getSheet('AMBIENTES'));
 
     // Cargar envs
-    planner.envs = envs.map(e => ({ name: (e.Ambiente||e.AMBIENTE||'').trim() })).filter(e=>e.name);
+    planner.envs = envs.map(e => ({ name: (e.Ambiente||e.AMBIENTE||'').trim(), municipio:String(e.Municipio||e.MUNICIPIO||'').trim() })).filter(e=>e.name);
     $plannerEnvs.value = planner.envs.map(e=>e.name).join("\n");
 
     // Modo importación: durante la importación, solo se usarán los datos presentes en el archivo
@@ -5489,8 +5987,11 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
 
     // Cargar ambientes (si está la hoja)
     if(envRows && envRows.length){
-      planner.envs = envRows.map(e => ({ name: (e.Ambientes||e.AMBIENTES||e.Ambiente||e.AMBIENTE||'').trim() }))
-        .filter(e=>e.name);
+      const knownEnvCities = new Map((planner.envs||[]).map(e=>[envNameKey(e.name), e.municipio||'']));
+      planner.envs = envRows.map(e => {
+        const name = String(e.Ambientes||e.AMBIENTES||e.Ambiente||e.AMBIENTE||'').trim();
+        return {name, municipio: String(e.Municipio||e.MUNICIPIO||knownEnvCities.get(envNameKey(name))||'').trim()};
+      }).filter(e=>e.name);
       $plannerEnvs.value = planner.envs.map(e=>e.name).join("\n");
     }
 
@@ -5810,14 +6311,14 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
 
           // MERGE: importar a estado temporal, capturar, restaurar y unificar
           const backup = {
-            envs: Array.isArray(planner.envs) ? planner.envs.map(x=>({name:x.name})) : [],
+            envs: Array.isArray(planner.envs) ? planner.envs.map(x=>({name:x.name,municipio:x.municipio||''})) : [],
             assignments: new Map(planner.assignments),
             envText: $plannerEnvs ? $plannerEnvs.value : ''
           };
 
           await importPlannerFromXlsx(ab); // carga temporal
           const incoming = {
-            envs: Array.isArray(planner.envs) ? planner.envs.map(x=>({name:x.name})) : [],
+            envs: Array.isArray(planner.envs) ? planner.envs.map(x=>({name:x.name,municipio:x.municipio||''})) : [],
             assignments: new Map(planner.assignments)
           };
 
@@ -5828,14 +6329,17 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
           if($plannerEnvs) $plannerEnvs.value = backup.envText;
 
           // unificar ambientes (si el archivo trae nuevos)
-          const known = new Set((planner.envs||[]).map(e=>norm(String(e.name||''))).filter(Boolean));
+          const known = new Map((planner.envs||[]).map(e=>[envNameKey(e.name),e]));
           (incoming.envs||[]).forEach(e=>{
             const nm = String(e.name||'').trim();
             if(!nm) return;
-            const key = norm(nm);
+            const key = envNameKey(nm);
             if(!known.has(key)){
-              planner.envs.push({name:nm});
-              known.add(key);
+              const next = {name:nm, municipio:String(e.municipio||'').trim()};
+              planner.envs.push(next);
+              known.set(key,next);
+            }else if(!known.get(key).municipio && e.municipio){
+              known.get(key).municipio = e.municipio;
             }
           });
 
@@ -5875,6 +6379,8 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
     if($plannerOnlyUnassigned) $plannerOnlyUnassigned.addEventListener('change', renderPending);
 
     if($plannerApplyEnvs) $plannerApplyEnvs.addEventListener('click', ()=>{ applyEnvsFromTextarea(); });
+    const applyConfig=document.getElementById('plannerApplyEnvsConfig');
+    if(applyConfig) applyConfig.addEventListener('click',()=>{applyEnvsFromTextarea();});
     if($plannerLoadDefaultEnvs) $plannerLoadDefaultEnvs.addEventListener('click', ()=>{
       $plannerEnvs.value = `1010A 
 1020A 
@@ -5937,6 +6443,35 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
       <p class="cm-title" id="cmTitle">Decisión requerida</p>
       <p class="cm-msg" id="cmMsg"></p>
       <div class="cm-actions" id="cmActions"></div>
+    </div>
+  </div>
+
+  <!-- Ventana accesible para dar de alta un ambiente sin editar texto manualmente. -->
+  <div id="envModal" class="env-modal" hidden>
+    <div class="env-modal-card" role="dialog" aria-modal="true" aria-labelledby="envModalTitle" aria-describedby="envModalDescription">
+      <div class="env-modal-head">
+        <div class="env-modal-symbol" aria-hidden="true">＋</div>
+        <div class="env-modal-heading">
+          <h2 id="envModalTitle">Nuevo ambiente</h2>
+          <p id="envModalDescription">Complete los datos para añadirlo al planificador.</p>
+        </div>
+        <button class="env-modal-close" id="envModalClose" type="button" aria-label="Cerrar ventana">×</button>
+      </div>
+      <form id="newEnvForm" autocomplete="off" novalidate>
+        <div class="env-modal-body">
+          <label for="newEnvName">Nombre o código del ambiente <span aria-hidden="true">*</span></label>
+          <input id="newEnvName" name="nombre" type="text" maxlength="80" required placeholder="Ej.: 1040F / Ambiente de informática" />
+          <label for="newEnvMunicipio">Municipio <span aria-hidden="true">*</span></label>
+          <input id="newEnvMunicipio" name="municipio" type="text" maxlength="70" list="envMunicipioSuggestions" required placeholder="Ej.: Ibagué" />
+          <datalist id="envMunicipioSuggestions"></datalist>
+          <p class="env-modal-note">Se conservarán los ambientes actuales y se crearán tres jornadas para el nuevo.</p>
+          <div id="envModalError" class="env-modal-error" role="alert" aria-live="assertive" hidden></div>
+        </div>
+        <div class="env-modal-actions">
+          <button class="btn subtle" id="envModalCancel" type="button">Cancelar</button>
+          <button class="btn primary" id="envModalSave" type="submit">Guardar ambiente</button>
+        </div>
+      </form>
     </div>
   </div>
 
