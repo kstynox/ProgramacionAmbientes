@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reporte de Fichas (P4-04 / PE-04)</title>
+  <title>Planificador de ambientes SENA | Diseño renovado</title>
   <style>
     :root{
       --bg:#f5f7fb; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e5e7eb;
@@ -706,9 +706,409 @@ body.env-modal-open{overflow:hidden}
 @media(max-width:760px){.grid-filter-bar{grid-template-columns:1fr}.grid-filter-label{grid-column:1}.env-item-actions button{padding:8px}}
 @media print{.grid-filter-bar,.grid-filter-footer,.backup-controls{display:none!important}}
 
+
+/* ===== Actualización visual v15. Cambios de presentación, no de lógica. ===== */
+:root{
+  --bg:#f3f6fa;
+  --card:#ffffff;
+  --soft:#f7fafc;
+  --text:#172435;
+  --muted:#617288;
+  --border:#e1e8ef;
+  --brand:#39A900;
+  --brand2:#277b00;
+  --focus:0 0 0 3px rgba(57,169,0,.17);
+  --shadow:0 10px 36px rgba(25,42,61,.055);
+  --state-red-bg:#fff0f0;
+  --state-yellow-bg:#fff7e5;
+  --state-green-bg:#eaf8ec;
+  --state-blue-bg:#eaf3ff;
+  --state-text:#172435;
+}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+body{background:var(--bg);font-size:14px;line-height:1.48;letter-spacing:.004em}
+.ui-sprite{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.ui-icon{width:17px;height:17px;display:inline-block;flex-shrink:0;vertical-align:middle;stroke:currentColor;fill:none;stroke-width:1.8}
+button,input,textarea,select{font:inherit}
+button,label[for]{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}
+button:focus-visible,label[for]:focus-visible,[role="button"]:focus-visible,summary:focus-visible{outline:3px solid rgba(57,169,0,.35);outline-offset:2px}
+input[type="checkbox"],input[type="radio"]{accent-color:#2c8400}
+::selection{background:#d3ecbe;color:#133705}
+.site-header{border-top:0;background:#fff;box-shadow:0 2px 18px rgba(24,45,60,.04);z-index:25}
+.site-header .header-wrap{padding:14px 26px;gap:24px;min-height:84px}
+.site-header .header-left{gap:12px}
+.site-header .logo{width:54px;height:54px;padding:7px;border-radius:15px;border:1px solid #e7f0e3;background:#f7fcf3}
+.site-header .logo img{width:40px;height:42px;object-fit:contain}
+.site-header .org .l1{font-size:13px;font-weight:830;letter-spacing:-.012em;line-height:1.3;color:#193025}
+.site-header .org .l2{margin-top:5px;font-weight:500;font-size:11px;color:#738095}
+.org-acronym{color:#287b00;font-weight:900}
+.site-header .title{flex:0 1 auto;margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px;line-height:1.3}
+.title-eyebrow{font-size:10px;font-weight:780;letter-spacing:.095em;text-transform:uppercase;color:#83919d}
+.title-main{font-size:18px;font-weight:890;color:#226a00;letter-spacing:-.025em}
+.site-header .line{height:3px;background:linear-gradient(90deg,#207700 0%,#39A900 38%,#91d05c 100%)}
+main{width:100%;max-width:1780px;margin-top:20px;padding:0 18px;gap:16px}
+.card{border:1px solid #e2eaf0;border-radius:19px;box-shadow:var(--shadow)}
+.card-h{background:#fbfcfe;border-bottom:1px solid #e6ecf2;padding:15px 18px}
+.card-h h2{font-size:12px;letter-spacing:.07em;font-weight:820;color:#53677c}
+.card-b{padding:16px 18px}
+.btn{font-weight:730;font-size:12px;min-height:39px;border-radius:10px;gap:7px;border-color:#dce5ed;box-shadow:0 1px 1px rgba(20,30,50,.025);transition:background .16s,border-color .16s,box-shadow .16s,transform .16s}
+.btn:hover{border-color:#b6c5d2;background:#f9fbfc}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:#297e00;color:#fff;border-color:#297e00}
+.btn.primary:hover{background:#1e6200;border-color:#1e6200}
+.btn.subtle{background:#f6f9fb}
+.search{border-color:#dbe5ed;font-size:13px;font-weight:530;border-radius:11px;min-height:40px}
+.search::placeholder{color:#9aabba;font-weight:450}
+.search:hover{border-color:#b9c9d6}
+.hint{font-size:12px;line-height:1.5;color:#6a7b8c}
+.badge{font-weight:690;background:#f8fafc;border-color:#e2e9f0}
+.chip{border-color:#dbe4ec;background:#fff;font-size:11.5px;border-radius:10px;padding:8px 11px;transition:background .14s,border-color .14s}
+.chip.active{box-shadow:none;background:#2c8100;border-color:#2c8100}
+.muni-wrap,.prog-group{background:#fbfcfd;border:1px solid #e7edf3;padding:13px;border-radius:14px}
+.muni-item{transition:border-color .14s;background:white}
+.muni-item:has(input:checked){border-color:#a9d591;background:#f3faef}
+.muni-item span{font-size:11px}
+#uploadCard .card-b{padding:18px}
+#uploadCard details{border:0;border-radius:0}
+#uploadCard .acc-sum{font-weight:760;color:#355269;padding:12px 16px;background:#fbfcfd}
+#uploadCard .dropzone{min-height:120px;border:1.5px dashed #9fc99b;border-radius:14px;background:linear-gradient(145deg,#f5fbf1,#fff);transition:background .16s,border-color .16s,box-shadow .16s;cursor:pointer;position:relative}
+#uploadCard .dropzone:hover,#uploadCard .dropzone:focus-visible{background:#f0fae9;border-color:#39A900;box-shadow:var(--focus)}
+.dz-title{font-size:14px;text-align:center;color:#214a21;font-weight:790}
+.dz-sub{font-size:12px;text-align:center;color:#657d69;max-width:490px}
+body.preload{background:radial-gradient(circle at 15% 20%,#e9f5df 0%,transparent 37%),var(--bg)}
+body.preload #uploadCard{border-radius:22px;box-shadow:0 25px 65px rgba(18,45,20,.085);width:min(740px,94vw)}
+body.preload #uploadCard .upload-brand{gap:7px;margin-bottom:25px}
+body.preload #uploadCard .upload-logo{width:75px;height:auto}
+body.preload #uploadCard .upload-program{font-size:23px;letter-spacing:-.03em;color:#1b3c23}
+body.preload #uploadCard .upload-program-sub{font-weight:500;font-size:13px;color:#718178}
+#kpis .kpi-summary-grid{gap:12px}
+#kpis .kpi-card{border-color:#e5ebf1;box-shadow:0 4px 14px rgba(20,35,55,.025);padding:17px;border-radius:14px;transition:box-shadow .18s,transform .18s}
+#kpis .kpi-card:hover{box-shadow:0 8px 25px rgba(20,35,55,.075);transform:translateY(-1px)}
+#kpis .kpi-icon{width:36px;height:36px;border-radius:11px}
+#kpis .kpi-icon .ui-icon{width:18px;height:18px}
+#kpis .kpi-icon-blue{color:#2563eb}
+#kpis .kpi-icon-green{color:#268524}
+#kpis .kpi-icon-amber{color:#b77700}
+#kpis .kpi-icon-red{color:#c43b34}
+#kpis .kpi-card-label{font-size:12px;font-weight:700;color:#52677c}
+#kpis .kpi-card-value{font-size:31px;font-weight:860;letter-spacing:-.035em}
+#kpis .kpi-card-sub{color:#8292a0;font-size:11px}
+#kpis .kpi-panel,#kpis .lvl-card{box-shadow:none;border-color:#e5ebf1}
+#kpis .kpi-panel-title{font-size:15px;letter-spacing:-.012em}
+#kpis .lvl-title{color:#77879b}
+#kpis .lvl-card{border-radius:13px}
+#kpis .lvl-num{color:#183147}
+.table-wrap{border-color:#e0e8f0;border-radius:13px}
+#tbl thead th{background:#f3f7fa;white-space:nowrap;font-size:10.5px;color:#496177}
+#tbl tbody tr:nth-child(even){background:#fcfdfe}
+#tbl tbody tr:hover{background:#f1f9ec}
+#tbl th,#tbl td{padding:11px 10px}
+/* Planner structure / header */
+#plannerCard{overflow:visible;border-color:#dfe8ef;border-radius:21px;box-shadow:0 16px 45px rgba(27,43,63,.06)}
+#plannerCard > .card-h{border-radius:20px 20px 0 0;padding:0;border-bottom-color:#e2eaf0;background:#fff;overflow:visible}
+#plannerCard .planner-top{display:flex;flex-direction:column;align-items:stretch;gap:15px;padding:19px 21px 15px}
+.planner-heading{display:flex;align-items:center;gap:13px;min-width:0}
+.planner-heading-icon{width:47px;height:47px;flex:0 0 47px;border-radius:14px;background:#eafaE4;border:1px solid #d5ebca;color:#297c00;display:flex;align-items:center;justify-content:center}
+.planner-heading-icon .ui-icon{width:22px;height:22px;stroke-width:2}
+.planner-heading-copy{flex:1;min-width:0}
+.planner-eyebrow{font-size:10px;color:#6d9570;font-weight:850;letter-spacing:.1em;line-height:1.35}
+.planner-heading h2{margin:3px 0 0;font-size:21px;font-weight:870;line-height:1.22;color:#182c3c;letter-spacing:-.03em;text-transform:none}
+.planner-heading p{margin:6px 0 0;font-size:12px;line-height:1.4;color:#77889a;font-weight:480;max-width:750px}
+.planner-offline-chip{display:flex;align-items:center;gap:6px;border:1px solid #d5ebcf;background:#f2faef;color:#36792a;padding:7px 11px;border-radius:999px;font-size:11px;font-weight:740;white-space:nowrap}
+.planner-offline-chip .ui-icon{width:14px;height:14px}
+#plannerCard .planner-actions{display:flex;gap:18px;align-items:end;justify-content:space-between;margin:0;padding:13px 14px;background:#f6f9fb;border:1px solid #e9eff4;border-radius:13px;box-shadow:none;flex-wrap:wrap}
+#plannerCard .planner-actions .pa-left{display:flex;flex-wrap:wrap;gap:15px;align-items:flex-end;min-width:0}
+#plannerCard .planner-actions .pa-right{display:flex;align-items:flex-end;gap:8px;margin-left:auto;flex-wrap:wrap}
+.action-cluster{display:flex;align-items:center;align-content:end;gap:6px;flex-wrap:wrap;position:relative;padding-top:19px}
+.action-cluster + .action-cluster{padding-left:13px;border-left:1px solid #dde5ed}
+.action-label{position:absolute;top:0;left:0;font-weight:830;color:#8392a3;font-size:9.5px;letter-spacing:.09em;line-height:1;text-transform:uppercase;white-space:nowrap}
+.action-cluster + .action-cluster .action-label{left:13px}
+#plannerCard .planner-actions .pa-sep{display:none}
+#plannerCard .planner-actions .pa-btn{min-height:36px;box-shadow:0 1px 2px rgba(20,35,55,.025);border:1px solid #dce5ed;border-radius:9px;padding:9px 11px;background:white;color:#304259;font-size:11.5px;font-weight:760;gap:7px;line-height:1.15;white-space:nowrap;text-decoration:none;cursor:pointer;transition:background .16s,border-color .16s,transform .16s,box-shadow .16s}
+#plannerCard .planner-actions .pa-btn .ui-icon{width:15px;height:15px;stroke-width:1.9}
+#plannerCard .planner-actions .pa-btn:hover{background:#f1f9ed;border-color:#add594;color:#277a00;box-shadow:0 3px 8px rgba(39,122,0,.055)}
+#plannerCard .planner-actions .pa-btn:focus-visible{outline:2px solid #39a900;outline-offset:2px}
+#plannerCard .planner-actions .pa-btn:active{transform:translateY(1px)}
+#plannerCard .planner-actions .pa-import{background:#e9f5ff;color:#17629f;border-color:#cfe5f7}
+#plannerCard .planner-actions .pa-import:hover{background:#dff0fd;color:#134e87;border-color:#afcfed}
+#plannerCard .planner-actions .pa-pdf .ui-icon{color:#c34245}
+#plannerCard .planner-actions .pa-xlsx .ui-icon{color:#22805d}
+#plannerCard .planner-actions .pa-save{background:#287d00;color:#fff;border-color:#287d00;box-shadow:0 3px 11px rgba(40,125,0,.14)}
+#plannerCard .planner-actions .pa-save:hover{background:#1f6500;color:#fff;border-color:#1f6500}
+#plannerCard .planner-actions .pa-print{background:#eef2f6;color:#516176}
+#plannerCard .planner-actions .pa-clear{color:#687589}
+#plannerCard .backup-controls{gap:6px}
+#plannerCard .backup-controls .pa-btn{background:white;border-color:#dce5ed}
+#plannerCard .planner-body{padding:15px;background:#f8fafc;border-radius:0 0 20px 20px}
+#plannerCard .planner-wrap{display:grid;grid-template-columns:minmax(250px,290px) minmax(540px,1fr) minmax(285px,315px);gap:13px;align-items:start}
+#plannerCard .pl-panel{min-width:0;overflow:hidden;background:#fff;border-radius:16px;border:1px solid #e1e8f0;box-shadow:0 5px 18px rgba(18,35,59,.035)}
+#plannerCard .pl-panel-h{padding:13px 14px;background:linear-gradient(180deg,#fcfdfe,#f6f9fb);border-bottom-color:#e4ebf0;letter-spacing:0;text-transform:none;font-weight:700;min-height:65px;display:flex;justify-content:center;flex-direction:column;gap:5px}
+.panel-h-title{font-weight:840;color:#263d51;font-size:12.5px;display:flex;align-items:center;gap:8px;line-height:1.25}
+.panel-h-title .ui-icon{width:17px;height:17px;color:#298000}
+.panel-h-desc{color:#74869a;font-size:10.5px;font-weight:520;line-height:1.3}
+#plannerCard .pl-panel-b{padding:12px 13px}
+#plannerCard #plannerSearch{width:100%;border-radius:10px;font-weight:500;font-size:12px;min-height:39px;padding-left:13px}
+#plannerCard .pl-list{gap:9px;max-height:min(620px,72vh);margin-top:13px;padding:2px 5px 8px 1px;scrollbar-width:thin;scrollbar-color:#cfdae5 transparent}
+#plannerCard .pl-list::-webkit-scrollbar,#plannerCard .pl-gridWrap::-webkit-scrollbar,#plannerCard .env-list::-webkit-scrollbar{height:7px;width:7px}
+#plannerCard .pl-list::-webkit-scrollbar-thumb,#plannerCard .pl-gridWrap::-webkit-scrollbar-thumb,#plannerCard .env-list::-webkit-scrollbar-thumb{background:#cdd9e2;border-radius:12px}
+#plannerPendingCount{background:#eef7e9;border-color:#d6e9cf;color:#2c7613;font-size:10.5px}
+#plannerOnlyUnassigned{width:15px;height:15px}
+#plannerCard .pl-card{position:relative;display:flex;flex-direction:column;gap:0;border-radius:12px;padding:12px 12px 10px;border:1px solid #dbe6ee;border-left:4px solid #679bd0;background:#f5f9ff;box-shadow:0 2px 8px rgba(27,43,62,.03);transition:box-shadow .15s,transform .15s,border-color .15s;min-height:102px}
+#plannerCard .pl-card .t1{flex:0 0 auto;min-height:19px;overflow:visible!important}
+#plannerCard .pl-card .t2{flex-shrink:0}
+#plannerCard .pl-card{min-height:137px}
+#plannerCard .pl-card:hover{transform:translateY(-1px);box-shadow:0 7px 19px rgba(25,43,60,.09)}
+#plannerCard .pl-card.selected{outline:2px solid #39a900;outline-offset:1px;box-shadow:0 0 0 4px #d5eeca}
+#plannerCard .pl-card .t1{color:#34475d;font-size:10px;font-weight:800;line-height:1.3;display:flex;align-items:center;gap:7px;margin:0}
+.pl-ficha-caption{font-size:9px;font-weight:850;letter-spacing:.09em;color:#637b8c}
+#plannerCard .pl-card .t1 b{font-size:14px;font-weight:850;color:#1c3146;letter-spacing:-.008em}
+#plannerCard .pl-card .t2{font-size:11.5px;font-weight:750;line-height:1.38;letter-spacing:.003em;color:#263b50;margin:7px 0 0;overflow-wrap:anywhere}
+#plannerCard .pl-card .pl-meta{border-top:1px solid rgba(63,84,101,.13);margin-top:auto;padding-top:10px;color:#557084;font-size:10px;font-weight:640;gap:5px}
+#plannerCard .pl-card .pl-meta-left{gap:5px}
+#plannerCard .pl-card .pl-meta-ico .ui-icon{width:13px;height:13px}
+#plannerCard .pl-card .pl-meta-val{font-size:12px;font-weight:850;color:#344c60}
+#plannerCard .pl-card .pl-meta-label{font-size:10px;font-weight:560;color:#708095}
+#plannerCard .pl-card .pl-meta-right{white-space:nowrap;font-size:10px;color:#566b80}
+#plannerCard .pl-card .pl-badges{margin:8px 0 10px}
+#plannerCard .pl-card .badge.warn{border-color:#ffc0b8;background:#fff2ee;color:#8f2d28;font-weight:740;font-size:10px}
+#plannerCard .pl-card .badge.warn .warn-ico-lg{font-size:13px}
+#plannerCard .pl-card.pl-close-red{background:#fff2f2!important;border-color:#f5c4c5!important;border-left:4px solid #d3504d!important}
+#plannerCard .pl-card.pl-close-orange{background:#fff9ed!important;border-color:#efd9a5!important;border-left:4px solid #dca135!important}
+#plannerCard .pl-card.pl-start-green{background:#f0f9f0!important;border-color:#bfdcc2!important;border-left:4px solid #42a65a!important}
+#plannerCard .pl-card.pl-default-blue{background:#f1f7ff!important;border-color:#c7dcf5!important;border-left:4px solid #4689c8!important}
+#plannerCard .pl-card.pl-mini-missing{background:#172333!important;border:1px solid #182334!important;border-left:4px solid #ed7070!important;color:#fff!important}
+#plannerCard .pl-card.pl-mini-missing :not(input):not(select){color:#fff!important}
+/* Grid, filtering, dropzones */
+#plannerGridPanel>.pl-panel-h{background:linear-gradient(180deg,#fbfdfa,#f5faf3)}
+#plannerGridPanel>.pl-panel-b{padding:12px}
+#plannerCard .grid-filter-bar{grid-template-columns:minmax(155px,.95fr) minmax(140px,1.1fr) auto;background:#f7f9fc;border-color:#e4ebf2;padding:10px 11px 11px;border-radius:12px;margin-bottom:8px;gap:9px}
+#plannerCard .grid-filter-label{display:flex;align-items:center;gap:6px;letter-spacing:.07em;font-weight:830;font-size:9.5px;color:#7a8a9a}
+#plannerCard .grid-filter-label .ui-icon{color:#43862b;width:13px;height:13px}
+#plannerCard .grid-filter-bar select,#plannerCard .grid-filter-bar input{min-height:37px;border-radius:9px;background:white;border:1px solid #dbe5ef;font-size:11px;font-weight:550;min-width:0}
+#plannerCard .grid-filter-bar input::placeholder{color:#9aa8b6;font-weight:450}
+#plannerCard .grid-filter-bar .btn{min-height:37px;align-self:stretch;justify-content:center;background:white;font-size:11px;padding:9px 11px}
+#plannerCard .grid-filter-bar .btn .ui-icon{width:12px;height:12px}
+#plannerCard .grid-filter-footer{gap:10px;margin:6px 1px 10px;font-size:10px;font-weight:580;color:#8191a2;align-items:flex-start}
+#plannerGridCount{font-size:10.5px;font-weight:760;color:#356a2b;white-space:nowrap}
+#plannerCard .pl-legend{background:#fcfdfe;border:1px solid #e7edf3;padding:8px 9px;border-radius:10px;gap:7px 12px;margin:0 0 10px}
+#plannerCard .pl-legend-item{gap:6px;font-size:10px;font-weight:660;color:#61768a}
+#plannerCard .pl-leg-box{width:9px;height:9px;border:0;border-radius:3px;background:#7a9bca;flex:0 0 9px}
+#plannerCard .pl-leg-box.red{background:#dc6664}
+#plannerCard .pl-leg-box.orange{background:#e6b457}
+#plannerCard .pl-leg-box.green{background:#57a977}
+#plannerCard .pl-leg-box.blue{background:#6f9cde}
+#plannerCard .pl-leg-box.black{background:#233142}
+#plannerCard .pl-gridWrap{border:1px solid #dfe7ef;border-radius:12px;overflow:auto;max-height:calc(100vh - 220px);background:#fff;box-shadow:inset 0 1px 3px rgba(29,45,66,.02)}
+#plannerCard .pl-grid{min-width:630px}
+#plannerCard .pl-grid-head,#plannerCard .pl-grid-row{grid-template-columns:minmax(102px,134px) repeat(3,minmax(130px,1fr))}
+#plannerCard .pl-grid-head{background:#edf5e9;border-color:#d9e6d7;backdrop-filter:none;box-shadow:0 2px 9px rgba(20,60,22,.05)}
+#plannerCard .pl-grid-head>div{display:flex;align-items:center;justify-content:center;padding:12px 8px;min-height:44px;background:#f1f7ef;text-align:center;font-size:10px;color:#39633c;font-weight:820;letter-spacing:.015em;border-right:1px solid #e0e9dd}
+#plannerCard .pl-grid-head>div:first-child{justify-content:flex-start;padding-left:12px}
+#plannerCard .pl-grid-row{border-bottom:1px solid #edf1f5}
+#plannerCard .pl-grid-row:nth-child(2n+1) .pl-cell{background:#fafcfe}
+#plannerCard .pl-grid-row:nth-child(2n+1) .lab{background:#f8fbf6}
+#plannerCard .pl-grid-row .lab{position:relative;display:flex;align-items:flex-start;justify-content:center;padding:11px 9px 11px 12px;border-right:1px solid #e8edf2;background:#fcfdfb;color:#2e7227;font-size:12px;font-weight:860;line-height:1.24}
+#plannerCard .pl-env-city{margin-top:6px;display:flex;align-items:center;color:#6e8291;font-weight:550;font-size:10px;line-height:1.3}
+#plannerCard .pl-env-city:before{content:"";height:6px;width:6px;background:#a7c8aa;border-radius:50%;display:inline-block;flex-shrink:0;margin-right:5px}
+#plannerCard .pl-cell{background:#fff;padding:8px;border-right:1px solid #e8edf2;min-height:132px}
+#plannerCard .pl-drop{border:1.5px dashed #c5d4e4;background:rgba(249,252,254,.64);border-radius:11px;min-height:116px;padding:7px;gap:7px;transition:border-color .14s,background .14s,box-shadow .14s;cursor:pointer}
+#plannerCard .pl-drop:hover,#plannerCard .pl-drop.over{background:#f3faef;border-color:#7ebf62;box-shadow:inset 0 0 0 1px rgba(57,169,0,.12)}
+#plannerCard .pl-mini{padding:10px;border:1px solid #d6e4ed;border-left:3px solid #5695d4;border-radius:10px;box-shadow:0 2px 5px rgba(30,45,64,.025);background:#f2f7fe;max-width:100%;overflow-wrap:anywhere;cursor:grab}
+#plannerCard .pl-mini:hover{box-shadow:0 4px 12px rgba(31,49,69,.09)}
+#plannerCard .pl-mini .l1{font-size:11.5px;line-height:1.4;font-weight:800;letter-spacing:.003em}
+#plannerCard .pl-mini .l2{font-size:10px;line-height:1.3;margin-top:8px;padding-top:7px;border-top:1px solid rgba(45,72,102,.12);font-weight:570}
+#plannerCard .pl-mini .l2 [data-resp-edit]{display:inline-block;border-bottom:1px dashed rgba(49,73,100,.35);cursor:text}
+#plannerCard .pl-mini .l3{font-size:9.8px;line-height:1.55;font-weight:580;opacity:.85}
+#plannerCard .pl-mini .row2{gap:4px;flex-wrap:wrap;justify-content:flex-start;margin-top:9px;align-items:center}
+#plannerCard .pl-mini .pl-badge{background:rgba(255,255,255,.55);color:#254158!important;border:1px solid rgba(55,78,96,.2);padding:5px 8px;font-size:9.5px;white-space:normal;font-weight:750}
+#plannerCard .pl-mini .row2 select{margin-left:auto;max-width:100%;padding:6px 4px;border-color:#cad9e4;border-radius:7px;font-size:10px}
+#plannerCard .pl-mini .xremove{margin-left:auto;width:27px;height:27px;border-radius:7px;background:rgba(255,255,255,.55);border:1px solid rgba(175,74,74,.14);color:#a63d3d;font-size:13px;justify-content:center}
+#plannerCard .pl-mini .xremove:hover{background:#ffe2e2;color:#a72020}
+#plannerCard .pl-note{background:#fff;border:1px dashed #c6d5e5;border-radius:8px;font-size:10px;padding:8px;color:#50687a;min-height:30px}
+#plannerCard .pl-note.is-empty:before{color:#899bae}
+#plannerCard .pl-mini.pl-close-red{background:#ffeded!important;border-color:#f2bab9!important;border-left:3px solid #d65e5a!important}
+#plannerCard .pl-mini.pl-close-orange{background:#fff6e5!important;border-color:#ebd7a9!important;border-left:3px solid #dbad54!important}
+#plannerCard .pl-mini.pl-start-green{background:#eaf7ec!important;border-color:#bedfca!important;border-left:3px solid #50a86a!important}
+#plannerCard .pl-mini.pl-default-blue{background:#edf5ff!important;border-color:#bed9f5!important;border-left:3px solid #5c95cf!important}
+#plannerCard .pl-mini:is(.pl-close-red,.pl-close-orange,.pl-start-green,.pl-default-blue) .l2{color:#33465b!important}
+#plannerCard .pl-mini:is(.pl-close-red,.pl-close-orange,.pl-start-green,.pl-default-blue) .l3{color:#50657a!important}
+#plannerCard .pl-mini.pl-mini-missing{background:#152334!important;color:#fff!important;border:1px solid #152334!important;border-left:3px solid #ff8585!important}
+#plannerCard .pl-mini.pl-mini-missing *:not(select):not(option):not(input){color:#fff!important}
+/* Environment management */
+#plannerCard .pl-envpanel .pl-panel-h{background:linear-gradient(180deg,#fcfdfe,#f6f9fb);padding:12px;min-height:65px}
+#plannerCard .env-head{display:flex;gap:7px;justify-content:space-between;flex-wrap:wrap}
+#plannerCard .env-head-left{gap:7px}
+#plannerCard .env-ico{width:30px;height:30px;flex:0 0 30px;border:1px solid #dbead6;background:#eaf6e7;color:#347c2c;border-radius:10px}
+#plannerCard .env-ico .ui-icon{width:16px;height:16px}
+#plannerCard .env-title{font-size:12.5px;font-weight:830;color:#223a50}
+#plannerCard .env-tabs{background:#edf1f5;border-radius:10px;padding:3px;gap:3px;flex-wrap:nowrap}
+#plannerCard .env-tab{font-size:10.5px;font-weight:720;padding:7px 8px;line-height:1.1;transition:background .16s,color .16s;border-radius:8px}
+#plannerCard .env-tab.is-active{background:white;color:#2f7128;box-shadow:0 1px 4px rgba(22,38,57,.075)}
+#plannerCard .env-hint{background:#f0f7fc;border:1px solid #dceaf4;color:#526b80;padding:10px;border-radius:10px;gap:8px;font-size:11px;font-weight:500;line-height:1.5}
+#plannerCard .env-hint-ico{line-height:1;color:#447c9e}
+#plannerCard .env-hint-ico .ui-icon{width:15px;height:15px}
+#plannerCard .env-create-wrap{margin:12px 0}
+#plannerCard .env-create-btn{min-height:42px;border-radius:11px;font-size:12px;font-weight:800;box-shadow:0 4px 12px rgba(30,108,0,.1)}
+#plannerCard .env-create-btn .ui-icon{width:17px;height:17px;stroke-width:2.3}
+#plannerCard .env-create-caption{font-weight:540;font-size:10px;color:#7c8e9c}
+#plannerCard .env-create-feedback:empty{display:none}
+#plannerCard .env-create-feedback{background:#eef9eb;border-radius:7px;padding:7px;font-size:11px;line-height:1.3}
+#plannerCard .env-sec{margin-top:16px}
+#plannerCard .env-sec-h{color:#6c8193;font-size:10px;font-weight:800;letter-spacing:.065em;display:flex;align-items:center;gap:6px;margin-bottom:8px}
+#plannerCard .env-sec-h .ui-icon{width:13px;height:13px;color:#3b8a29}
+#plannerCard .env-list{background:#f8fafc;padding:7px;border-radius:11px;border-color:#e4ebf1;min-height:100px;max-height:340px;scrollbar-width:thin;scrollbar-color:#cdd9e2 transparent}
+#plannerCard .env-list .env-item{background:#fff;border:1px solid #e5ebf1;border-radius:9px;padding:10px 8px;margin-bottom:6px;gap:7px;align-items:center;box-shadow:0 1px 2px rgba(20,35,55,.025)}
+#plannerCard .env-list .env-item:last-child{margin-bottom:0;border-bottom:1px solid #e5ebf1}
+#plannerCard .env-item-name{font-size:12px;font-weight:830;color:#263a4f}
+#plannerCard .env-item-city{color:#7d8fa0;font-size:10.5px;font-weight:580}
+#plannerCard .env-item-city:before{content:"";display:inline-block;width:5px;height:5px;vertical-align:middle;border-radius:50%;background:#96ba8c;margin-right:5px}
+#plannerCard .env-item-actions{gap:4px}
+#plannerCard .env-item-actions button{border-radius:7px;min-height:30px;padding:6px 7px;font-size:10px;color:#56758c;font-weight:740;background:#f6f9fb;gap:3px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+#plannerCard .env-item-actions button .ui-icon{width:12px;height:12px}
+#plannerCard .env-item-actions button.env-delete{color:#bd5050;background:#fff7f7}
+#plannerCard .env-item-actions button:hover{background:#e9f4e5;color:#307c1e}
+#plannerCard .env-item-actions button.env-delete:hover{background:#fff0f0;color:#a83e3e}
+#plannerCard .env-action-sub{color:#8494a4;font-size:10.5px;line-height:1.45}
+#plannerCard .env-actions{gap:7px}
+#plannerCard .env-actions #plannerApplyEnvs{flex:1}
+#plannerCard .env-actions #plannerRefreshEnvList{width:38px;flex:0 0 38px}
+#plannerCard .env-actions .ui-icon{width:15px;height:15px}
+#plannerCard .env-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#plannerCard .env-kpi{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-height:65px;background:#f8fafc;border:1px solid #e3ebf1;border-radius:10px;padding:10px;font-size:10.5px;color:#75879a;font-weight:590}
+#plannerCard .env-kpi b{font-size:20px;line-height:1.1;font-weight:850;letter-spacing:-.025em;color:#1e3549}
+#plannerCard .env-kpi.env-kpi-ok{background:#eef9ec;border-color:#dcebd5;color:#4f7952;grid-column:1/-1;min-height:60px;flex-direction:row;justify-content:space-between;align-items:center}
+#plannerCard .env-kpi.env-kpi-ok b{color:#2f7c19}
+#plannerCard .incons{scrollbar-width:thin}
+#plannerCard .incons .in-item{border-radius:9px;font-weight:620;padding:10px;font-size:11px}
+#plannerCard [data-envpane="cfg"] .search{width:100%;max-width:100%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.45;background:#fbfcfe}
+/* Modal and menus */
+.env-modal{background:rgba(17,31,48,.62);backdrop-filter:blur(6px);padding:20px}
+.env-modal-card{width:min(465px,100%);border-radius:19px;border-color:#e0e7ef;box-shadow:0 26px 85px rgba(11,25,42,.24);animation:modalEnter .2s ease-out}
+@keyframes modalEnter{from{opacity:0;transform:translateY(9px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.env-modal-head{padding:21px 22px 17px;background:#fbfcfd;border-color:#e7edf3}
+.env-modal-symbol{background:#e9f6e3;color:#317f17;width:44px;flex-basis:44px;height:44px;border-radius:12px}
+.env-modal-symbol .ui-icon{width:21px;height:21px;stroke-width:2.3}
+.env-modal-heading h2{font-weight:870;font-size:19px;letter-spacing:-.025em}
+.env-modal-heading p{font-size:12px;color:#76879b;margin-top:5px}
+.env-modal-close{color:#8293a4;border:1px solid transparent}
+.env-modal-close .ui-icon{width:18px;height:18px}
+.env-modal-close:hover{background:#eef2f5;color:#30435b}
+.env-modal-body{padding:21px 22px 7px;gap:8px}
+.env-modal-body label{color:#2c4054;font-size:12px;font-weight:770}
+.env-modal-body input{margin-bottom:12px;min-height:44px;padding:12px 13px;border-radius:10px;border-color:#dbe4ed;font-size:13px;font-weight:540}
+.env-modal-body input::placeholder{color:#a5b1bd;font-weight:400}
+.env-modal-note{font-size:11px;color:#7c8e9d;line-height:1.5}
+.env-modal-actions{padding:17px 22px 22px;border-top:1px solid #eff2f5;margin-top:10px}
+.env-modal-actions .btn{min-width:110px;min-height:41px}
+#choiceModal{background:rgba(17,31,48,.62);backdrop-filter:blur(5px)}
+#choiceModal .cm-card{border-radius:18px;box-shadow:0 24px 76px rgba(15,27,42,.22);padding:24px}
+#choiceModal .cm-title{font-weight:850;font-size:18px;color:#203649;letter-spacing:-.02em}
+#choiceModal .cm-msg{font-size:13px;line-height:1.6;color:#63778a;font-weight:520}
+#choiceModal .cm-actions .btn{min-height:40px}
+.pl-pop{border-radius:15px;border-color:#dde7ef;box-shadow:0 18px 45px rgba(22,37,55,.16);padding:12px}
+.pl-pop-h{color:#2d485d;font-size:12px;font-weight:800}
+.pl-pop-list{gap:7px}
+.pl-pop-item{background:#f8fafc;border-color:#e3eaf0}
+.pl-pop-item:hover{background:#f0faeb;border-color:#add49e;filter:none}
+/* Footer */
+.page-footer{width:100%;margin-top:auto;padding:0 22px;margin-bottom:17px}
+.footer-kicker{font-size:10px;font-weight:760;color:#9cabb8;letter-spacing:.18em}
+.footer-card{width:min(740px,100%);padding:8px 11px;border-radius:16px;border-color:#e3e9ee;box-shadow:none}
+.footer-avatar{background:#edf7e8;border-color:#d8e9d1;font-size:15px;width:34px;height:34px}
+.footer-card .pill-btn{width:32px;height:32px}
+.footer-card .t1{font-size:12px}
+.footer-card .t2{font-size:9px}
+.footer-card .pill-badge{font-size:10px;font-weight:730}
+/* Layout: keep the grid readable and preserve native horizontal scrolling */
+@media(max-width:1430px){
+  #plannerCard .planner-wrap{grid-template-columns:minmax(230px,260px) minmax(440px,1fr) minmax(270px,295px);gap:11px}
+  #plannerCard .planner-actions{gap:9px}
+  #plannerCard .planner-actions .pa-left{gap:10px}
+  #plannerCard .planner-actions .pa-btn{padding:9px 8px;font-size:11px}
+  #plannerCard .planner-top{padding:15px}
+  #plannerCard .planner-body{padding:11px}
+}
+@media(max-width:1170px){
+  #plannerCard .planner-wrap{grid-template-columns:minmax(215px,.42fr) minmax(440px,1fr)}
+  #plannerGridPanel{grid-column:2;grid-row:1}
+  #plannerEnvPanel{grid-column:1/-1;grid-row:2}
+  #plannerCard .pl-list{max-height:610px}
+  #plannerCard .env-list{max-height:240px}
+  #plannerCard .env-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #plannerCard .env-kpi.env-kpi-ok{grid-column:auto}
+  #plannerCard .pl-envpanel .pl-panel-b{display:block}
+}
+@media(max-width:790px){
+  html{scroll-padding-top:92px}
+  .site-header .header-wrap{padding:11px 16px;min-height:66px;gap:12px}
+  .site-header .logo{width:44px;height:44px;flex-basis:44px;padding:6px}
+  .site-header .logo img{width:34px;height:34px}
+  .site-header .org .l1{font-size:11px}
+  .site-header .org .l2{font-size:9.5px}
+  .site-header .title{display:none}
+  main{padding:0 10px;margin-top:11px}
+  #plannerCard .planner-wrap{grid-template-columns:minmax(0,1fr)}
+  #plannerGridPanel,#plannerEnvPanel{grid-column:auto;grid-row:auto}
+  #plannerCard .planner-heading-icon{width:40px;height:40px;flex-basis:40px}
+  #plannerCard .planner-heading h2{font-size:18px}
+  #plannerCard .planner-heading p{font-size:11px}
+  #plannerCard .planner-top{padding:13px;gap:13px}
+  #plannerCard .planner-body{padding:9px}
+  #plannerCard .planner-actions{padding:10px;align-items:stretch}
+  #plannerCard .planner-actions .pa-left{gap:12px}
+  #plannerCard .planner-actions .pa-right{width:100%;justify-content:flex-start;margin:0;border-top:1px solid #e2eaf0;padding-top:10px}
+  .planner-offline-chip{display:none}
+  #plannerCard .pl-list{max-height:285px}
+  #plannerCard .pl-gridWrap{max-height:58vh}
+  #plannerCard .grid-filter-footer{flex-wrap:wrap}
+  #plannerCard .env-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #plannerCard .env-kpi.env-kpi-ok{grid-column:1/-1}
+  #plannerCard .env-list{max-height:320px}
+}
+@media(max-width:530px){
+  #plannerCard .planner-heading{align-items:flex-start;gap:10px}
+  #plannerCard .planner-heading p{display:none}
+  #plannerCard .planner-heading h2{font-size:17px}
+  #plannerCard .planner-eyebrow{font-size:9px}
+  #plannerCard .planner-actions .pa-left{gap:10px}
+  #plannerCard .planner-actions .action-cluster{flex:1 1 100%;border:0;padding-left:0;justify-content:flex-start}
+  #plannerCard .planner-actions .action-cluster .action-label{left:0}
+  #plannerCard .planner-actions .pa-btn{font-size:11px}
+  #plannerCard .grid-filter-bar{grid-template-columns:1fr}
+  #plannerCard .grid-filter-label{grid-column:auto}
+  #plannerCard .pl-panel-b{padding:10px}
+  #plannerCard .pl-legend-item{font-size:9px}
+  #plannerCard .pl-gridWrap{max-height:58vh}
+  #plannerCard .env-head{flex-wrap:nowrap}
+  #plannerCard .env-tabs{gap:2px}
+  #plannerCard .env-tab{padding:6px;font-size:10px}
+  #plannerCard .env-list .env-item{flex-wrap:wrap}
+  #plannerCard .env-item-actions{margin-left:auto}
+  .env-modal{padding:10px}
+  .env-modal-head{padding:15px}
+  .env-modal-body{padding:17px 15px 6px}
+  .env-modal-actions{padding:13px 15px 17px;flex-direction:column-reverse}
+  .env-modal-actions .btn{width:100%}
+  .footer-card{border-radius:15px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+@media print{
+  #plannerCard .planner-top{display:none!important}
+  #plannerCard .planner-body{background:#fff!important;padding:0!important}
+  #plannerCard .pl-panel{box-shadow:none!important;border-radius:0!important}
+  #plannerCard .pl-gridWrap{max-height:none!important;overflow:visible!important}
+  #plannerCard .pl-grid-head,#plannerCard .pl-grid-row{grid-template-columns:105px repeat(3,minmax(0,1fr))!important}
+  #plannerCard .pl-mini{box-shadow:none!important}
+  .ui-sprite{display:none!important}
+}
+
 </style>
 </head>
 <body>
+<svg class="ui-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><symbol id="ui-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol><symbol id="ui-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></symbol><symbol id="ui-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol><symbol id="ui-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol><symbol id="ui-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol><symbol id="ui-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4L16.5 3.5Z"/></symbol><symbol id="ui-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2m3 0-1 15H6L5 6m5 4v7m4-7v7"/></symbol><symbol id="ui-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M7 3v6h9V3M7 21v-9h10v9"/></symbol><symbol id="ui-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 15h12v6H6zM18 12h.01"/></symbol><symbol id="ui-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V3m0 0-5 5m5-5 5 5M4 16v4h16v-4"/></symbol><symbol id="ui-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0 5-5m-5 5-5-5M4 17v4h16v-4"/></symbol><symbol id="ui-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></symbol><symbol id="ui-sheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol><symbol id="ui-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="ui-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.7-4.3L3 9m0-6v6h6M4 13a8 8 0 0 0 14.7 4.3L21 15m-6 0h6v6"/></symbol><symbol id="ui-eraser" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m20 20-9 0L4 13a2 2 0 0 1 0-3l7-7a2 2 0 0 1 3 0l7 7a2 2 0 0 1 0 3l-7 7M8 17l9-9"/></symbol><symbol id="ui-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/></symbol><symbol id="ui-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></symbol><symbol id="ui-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol><symbol id="ui-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.02"/></symbol><symbol id="ui-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 4.5v15ZM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol><symbol id="ui-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9m4 0h3M4 17h3m4 0h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol><symbol id="ui-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3a4 4 0 0 1 0 8M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol><symbol id="ui-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m10.3 3.5-8.2 14A2 2 0 0 0 3.8 20h16.4a2 2 0 0 0 1.7-2.5l-8.2-14a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4m0 3v.01"/></symbol><symbol id="ui-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></symbol></svg>
 <header class="site-header">
   <div class="header-wrap">
     <div class="header-left">
@@ -716,11 +1116,11 @@ body.env-modal-open{overflow:hidden}
         <img src="data:image/png;base64,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" alt="SENA" />
       </div>
       <div class="org">
-        <div class="l1">Servicio Nacional de Aprendizaje - SENA</div>
-        <div class="l2">Reporte para Formación (carga P4-04 / PE-04)</div>
+        <div class="l1">Servicio Nacional de Aprendizaje <span class="org-acronym">SENA</span></div>
+        <div class="l2">Planificación de ambientes y horarios · P4-04 / PE-04</div>
       </div>
     </div>
-    <div class="title">Asignacion de Ambientes</div>
+    <div class="title"><span class="title-eyebrow">Gestión académica · Ambientes de aprendizaje</span><span class="title-main">Asignación de ambientes</span></div>
   </div>
   <div class="line"></div>
 </header>
@@ -868,7 +1268,7 @@ body.env-modal-open{overflow:hidden}
   <div class="kpi-summary-grid">
     <div class="kpi-card">
       <div class="kpi-card-top">
-        <div class="kpi-icon kpi-icon-blue" aria-hidden="true">👥</div>
+        <div class="kpi-icon kpi-icon-blue" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#ui-users"></use></svg></div>
       </div>
       <div class="kpi-card-label">Total Aprendices</div>
       <div class="kpi-card-value" id="kTotalApr">0</div>
@@ -877,7 +1277,7 @@ body.env-modal-open{overflow:hidden}
 
     <div class="kpi-card">
       <div class="kpi-card-top">
-        <div class="kpi-icon kpi-icon-green" aria-hidden="true">📄</div>
+        <div class="kpi-icon kpi-icon-green" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#ui-file"></use></svg></div>
       </div>
       <div class="kpi-card-label">Total Fichas</div>
       <div class="kpi-card-value" id="kRegs">0</div>
@@ -886,7 +1286,7 @@ body.env-modal-open{overflow:hidden}
 
     <div class="kpi-card">
       <div class="kpi-card-top kpi-card-top-right">
-        <div class="kpi-icon kpi-icon-amber" aria-hidden="true">⏳</div>
+        <div class="kpi-icon kpi-icon-amber" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#ui-clock"></use></svg></div>
         <div class="kpi-tag kpi-tag-muted">Próximos 6 meses</div>
       </div>
       <div class="kpi-card-label">Cierre &lt; 180 Días</div>
@@ -896,7 +1296,7 @@ body.env-modal-open{overflow:hidden}
 
     <div class="kpi-card kpi-card-critical">
       <div class="kpi-card-top kpi-card-top-right">
-        <div class="kpi-icon kpi-icon-red" aria-hidden="true">🚨</div>
+        <div class="kpi-icon kpi-icon-red" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#ui-warning"></use></svg></div>
         <div class="kpi-tag kpi-tag-critical">Crítico</div>
       </div>
       <div class="kpi-card-label">Cierre &lt; 90 Días</div>
@@ -1006,27 +1406,39 @@ body.env-modal-open{overflow:hidden}
   <section class="card" id="plannerCard">
     <div class="card-h">
       <div class="planner-top">
-        <h2 style="margin:0">Planificador de Ambientes</h2>
-        <div class="planner-actions">
-
+        <div class="planner-heading">
+          <div class="planner-heading-icon" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#ui-grid"></use></svg></div>
+          <div class="planner-heading-copy">
+            <div class="planner-eyebrow">ESPACIOS DE FORMACIÓN · PROGRAMACIÓN</div>
+            <h2>Planificador de ambientes</h2>
+            <p>Distribuya las fichas por ambiente y jornada. Administre espacios, reportes y respaldos desde un solo lugar.</p>
+          </div>
+          <span class="planner-offline-chip"><svg class="ui-icon" aria-hidden="true"><use href="#ui-shield"></use></svg> Sin conexión</span>
+        </div>
+        <div class="planner-actions" role="toolbar" aria-label="Herramientas del planificador">
           <div class="pa-left">
-            <button class="pa-btn" id="plannerClear" type="button"><span class="pa-ico" aria-hidden="true">🧹</span>Limpiar</button>
-            <span class="pa-sep" aria-hidden="true"></span>
-            <label class="pa-btn pa-import" for="plannerImport" style="cursor:pointer"><span class="pa-ico" aria-hidden="true">☁️</span>Importar
-              <input id="plannerImport" type="file" accept=".xlsx" multiple style="display:none" />
-            </label>
-            <button class="pa-btn pa-pdf" id="plannerExportPDF" type="button"><span class="pa-ico" aria-hidden="true">🧾</span>PDF</button>
-            <button class="pa-btn pa-xlsx" id="plannerExport" type="button" title="Descargar Excel sin conexión"><span class="pa-ico" aria-hidden="true">📊</span>Excel</button>
-            <span class="pa-sep" aria-hidden="true"></span>
-            <div class="backup-controls" aria-label="Copias de seguridad">
-              <button class="pa-btn" id="plannerBackupExport" type="button" title="Guardar ambientes, fichas, asignaciones, notas, municipios y reporte en JSON">↓ Respaldo</button>
-              <button class="pa-btn" id="plannerBackupImportBtn" type="button" title="Restaurar una copia completa JSON">↑ Restaurar</button>
+            <div class="action-cluster">
+              <span class="action-label">PLANIFICACIÓN</span>
+              <button class="pa-btn pa-clear" id="plannerClear" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#ui-eraser"></use></svg> Limpiar</button>
+              <label class="pa-btn pa-import" for="plannerImport" style="cursor:pointer"><svg class="ui-icon" aria-hidden="true"><use href="#ui-upload"></use></svg> Importar plan
+                <input id="plannerImport" type="file" accept=".xlsx" multiple style="display:none" />
+              </label>
+            </div>
+            <div class="action-cluster">
+              <span class="action-label">EXPORTAR</span>
+              <button class="pa-btn pa-pdf" id="plannerExportPDF" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#ui-file"></use></svg> PDF</button>
+              <button class="pa-btn pa-xlsx" id="plannerExport" type="button" title="Descargar Excel sin conexión"><svg class="ui-icon" aria-hidden="true"><use href="#ui-sheet"></use></svg> Excel</button>
+            </div>
+            <div class="action-cluster backup-controls" aria-label="Copias de seguridad">
+              <span class="action-label">SEGURIDAD</span>
+              <button class="pa-btn" id="plannerBackupExport" type="button" title="Guardar ambientes, fichas, asignaciones, notas, municipios y reporte en JSON"><svg class="ui-icon" aria-hidden="true"><use href="#ui-download"></use></svg> Respaldo</button>
+              <button class="pa-btn" id="plannerBackupImportBtn" type="button" title="Restaurar una copia completa JSON"><svg class="ui-icon" aria-hidden="true"><use href="#ui-upload"></use></svg> Restaurar</button>
               <input id="plannerBackupImport" type="file" accept=".json,application/json" hidden />
             </div>
           </div>
           <div class="pa-right">
-            <button class="pa-btn" id="plannerSaveChanges" type="button"><span class="pa-ico" aria-hidden="true">💾</span>Guardar Cambios</button>
-            <button class="pa-btn pa-print" id="plannerPrint" type="button"><span class="pa-ico" aria-hidden="true">🖨️</span>Modo Impresión</button>
+            <button class="pa-btn pa-save" id="plannerSaveChanges" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#ui-save"></use></svg> Guardar cambios</button>
+            <button class="pa-btn pa-print" id="plannerPrint" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#ui-printer"></use></svg> Modo impresión</button>
           </div>
         </div>
       </div>
@@ -1034,7 +1446,7 @@ body.env-modal-open{overflow:hidden}
 	    <div class="card-b planner-body">
 	      <div class="planner-wrap">
         <div class="pl-panel">
-          <div class="pl-panel-h">Fichas disponibles (arrastre o seleccione y luego haga clic en una celda)</div>
+          <div class="pl-panel-h"><div class="panel-h-title"><svg class="ui-icon" aria-hidden="true"><use href="#ui-layers"></use></svg> Fichas disponibles</div><span class="panel-h-desc">Arrastre la ficha o selecciónela para asignarla</span></div>
           <div class="pl-panel-b">
             <input id="plannerSearch" class="search" type="search" placeholder="Buscar en pendientes…" aria-label="Buscar pendientes" style="min-width:unset" />
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
@@ -1053,13 +1465,13 @@ body.env-modal-open{overflow:hidden}
         </div>
 
 	      <div class="pl-panel" id="plannerGridPanel">
-          <div class="pl-panel-h">Cuadrícula (Ambiente × Jornada)</div>
+          <div class="pl-panel-h"><div class="panel-h-title"><svg class="ui-icon" aria-hidden="true"><use href="#ui-grid"></use></svg> Cuadrícula de programación</div><span class="panel-h-desc">Ambientes organizados por jornada</span></div>
           <div class="pl-panel-b">
             <div class="grid-filter-bar" role="search" aria-label="Filtros de ambientes en la cuadrícula">
-              <div class="grid-filter-label">Buscar ambientes en la cuadrícula</div>
+              <div class="grid-filter-label"><svg class="ui-icon" aria-hidden="true"><use href="#ui-sliders"></use></svg> FILTRAR AMBIENTES</div>
               <select id="plannerGridMunicipio" aria-label="Filtrar ambientes por municipio"><option value="">Todos los municipios</option></select>
-              <input id="plannerGridSearch" type="search" autocomplete="off" placeholder="Nombre o código del ambiente…" aria-label="Buscar ambiente por nombre" />
-              <button id="plannerGridClear" class="btn small subtle" type="button">Limpiar</button>
+              <input id="plannerGridSearch" type="search" autocomplete="off" placeholder="Buscar nombre o código…" aria-label="Buscar ambiente por nombre" />
+              <button id="plannerGridClear" class="btn small subtle" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#ui-x"></use></svg> Limpiar</button>
             </div>
             <div class="grid-filter-footer"><span id="plannerGridCount" aria-live="polite">Todos los ambientes</span><span>Los filtros solo afectan la vista y las exportaciones; el respaldo incluye todo.</span></div>
             <div class="pdf-header" id="plannerPdfHeader">
@@ -1076,6 +1488,7 @@ body.env-modal-open{overflow:hidden}
               <span class="pl-legend-item"><span class="pl-leg-box red"></span><span>Cierre &lt; 90 días</span></span>
               <span class="pl-legend-item"><span class="pl-leg-box orange"></span><span>Cierre 90–180 días</span></span>
               <span class="pl-legend-item"><span class="pl-leg-box green"></span><span>Fichas recientes</span></span>
+              <span class="pl-legend-item"><span class="pl-leg-box blue"></span><span>En curso</span></span>
               <span class="pl-legend-item"><span class="pl-leg-box black"></span><span>Falta PE-04 / dato crítico</span></span>
             </div>
 
@@ -1089,7 +1502,7 @@ body.env-modal-open{overflow:hidden}
           <div class="pl-panel-h" style="text-transform:none;letter-spacing:0"> 
             <div class="env-head">
               <div class="env-head-left">
-                <span class="env-ico" aria-hidden="true">🏢</span>
+                <span class="env-ico" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#ui-layers"></use></svg></span>
                 <span class="env-title">Ambientes</span>
               </div>
               <div class="env-tabs" role="tablist" aria-label="Panel de ambientes">
@@ -1101,25 +1514,25 @@ body.env-modal-open{overflow:hidden}
           <div class="pl-panel-b">
             <div class="env-tabpane is-active" data-envpane="amb" role="tabpanel">
               <div class="env-hint">
-                <div class="env-hint-ico" aria-hidden="true">ℹ️</div>
+                <div class="env-hint-ico" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#ui-info"></use></svg></div>
                 <div class="env-hint-txt">Agregue ambientes con su municipio. Cada ambiente tendrá las jornadas Mañana, Tarde y Noche. También puede editar el listado desde Configuración.</div>
               </div>
 
               <div class="env-create-wrap">
-                <button class="btn primary env-create-btn" id="plannerAddEnvBtn" type="button" aria-haspopup="dialog" aria-controls="envModal">＋ Nuevo ambiente</button>
+                <button class="btn primary env-create-btn" id="plannerAddEnvBtn" type="button" aria-haspopup="dialog" aria-controls="envModal"><svg class="ui-icon" aria-hidden="true"><use href="#ui-plus"></use></svg> Nuevo ambiente</button>
                 <p class="env-create-caption">Añadir por nombre y municipio</p>
                 <div class="env-create-feedback" id="envActionFeedback" role="status" aria-live="polite"></div>
               </div>
 
               <div class="env-sec">
-                <div class="env-sec-h">LISTADO DE AMBIENTES</div>
+                <div class="env-sec-h"><svg class="ui-icon" aria-hidden="true"><use href="#ui-layers"></use></svg> LISTADO DE AMBIENTES</div>
                 <div class="env-list" id="plannerEnvList"></div>
                 <p class="env-action-sub">Use Editar para cambiar nombre o municipio. Eliminar dejará las fichas de ese ambiente sin asignación, previa confirmación.</p>
               </div>
 
               <div class="env-actions">
                 <button class="btn" id="plannerApplyEnvs" type="button">Actualizar cuadrícula</button>
-                <button class="btn subtle" id="plannerRefreshEnvList" type="button" title="Refrescar" aria-label="Refrescar">⟳</button>
+                <button class="btn subtle" id="plannerRefreshEnvList" type="button" title="Refrescar" aria-label="Refrescar"><svg class="ui-icon" aria-hidden="true"><use href="#ui-refresh"></use></svg></button>
               </div>
 
               <div class="env-sec" style="margin-top:12px">
@@ -1214,7 +1627,7 @@ body.env-modal-open{overflow:hidden}
 
 
   <div id="plPopover" class="pl-pop" style="display:none" role="dialog" aria-label="Asignar ficha">
-    <div class="pl-pop-h">Asignar a: <span id="plPopTarget">—</span><button class="btn small subtle" id="plPopClose" type="button">Cerrar</button></div>
+    <div class="pl-pop-h">Asignar a: <span id="plPopTarget">—</span><button class="btn small subtle" id="plPopClose" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#ui-x"></use></svg> Cerrar</button></div>
     <input id="plPopSearch" class="search" type="search" placeholder="Buscar ficha o programa…" style="min-width:unset" />
     <div class="pl-pop-list" id="plPopList"></div>
   </div>
@@ -3673,7 +4086,7 @@ const $plannerExportPDF = document.getElementById('plannerExportPDF');
           <div class="t3">Inicio ${escapeHtml(ini)} Finaliza ${escapeHtml(fin)}</div>
           <div class="pl-badges">${warn ? '<span class="badge warn"><span class="warn-ico-lg">⚠</span> Cierre < 90 días</span>' : ''}${missing ? '<span class="badge danger">No existe en PE04</span>' : ''}</div>
           <div class="pl-meta">
-            <div class="pl-meta-left"><span class="pl-meta-ico" aria-hidden="true">👥</span><span class="pl-meta-val">${escapeHtml(String(r.TOTAL_APRENDICES||'0'))}</span></div>
+            <div class="pl-meta-left"><span class="pl-meta-ico" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#ui-users"></use></svg></span><span class="pl-meta-val">${escapeHtml(String(r.TOTAL_APRENDICES||'0'))}</span><span class="pl-meta-label">aprendices</span></div>
             <div class="pl-meta-right">${escapeHtml(r.FECHA_FIN_ETAPA_LECTIVA || '')}</div>
           </div>
         </div>
@@ -4030,11 +4443,11 @@ const $plannerExportPDF = document.getElementById('plannerExportPDF');
       const missing = !!asg.missingPE04;
       return `
         <div class="pl-card ${cls} ${status} ${missing ? 'pl-mini-missing' : ''}" draggable="true" data-ficha="${escapeHtml(f)}" title="${escapeHtml(programa)}">
-          <div class="t1">Ficha: <b>${escapeHtml(f)}</b></div>
+          <div class="t1"><span class="pl-ficha-caption">FICHA</span><b>${escapeHtml(f)}</b></div>
           <div class="t2">${escapeHtml(programa)}</div>
           <div class="pl-badges">${warn ? '<span class="badge warn"><span class="warn-ico-lg">⚠</span> Cierre < 90 días</span>' : ''}${missing ? '<span class="badge danger">No existe en PE04</span>' : ''}</div>
           <div class="pl-meta">
-            <div class="pl-meta-left"><span class="pl-meta-ico" aria-hidden="true">👥</span><span class="pl-meta-val">${escapeHtml(String(r.TOTAL_APRENDICES||'0'))}</span></div>
+            <div class="pl-meta-left"><span class="pl-meta-ico" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#ui-users"></use></svg></span><span class="pl-meta-val">${escapeHtml(String(r.TOTAL_APRENDICES||'0'))}</span><span class="pl-meta-label">aprendices</span></div>
             <div class="pl-meta-right">${escapeHtml(r.FECHA_FIN_ETAPA_LECTIVA || '')}</div>
           </div>
         </div>
@@ -4485,7 +4898,7 @@ function updatePlannerSidePanel(){
       const items = (planner.envs||[]).map(e=>{
         const tag = envTag(e.name);
         const city = String(e.municipio||'').trim();
-        return `<div class="env-item"><div class="env-item-meta"><span class="env-item-name">${escapeHtml(e.name)}</span>${city ? `<span class="env-item-city">${escapeHtml(city)}</span>` : '<span class="env-item-city">Sin municipio</span>'}</div><div class="env-item-actions"><button type="button" data-env-action="edit" data-env-name="${escapeHtml(e.name)}" title="Editar ambiente ${escapeHtml(e.name)}" aria-label="Editar ambiente ${escapeHtml(e.name)}">Editar</button><button class="env-delete" type="button" data-env-action="delete" data-env-name="${escapeHtml(e.name)}" title="Eliminar ambiente ${escapeHtml(e.name)}" aria-label="Eliminar ambiente ${escapeHtml(e.name)}">Eliminar</button></div></div>`;
+        return `<div class="env-item"><div class="env-item-meta"><span class="env-item-name">${escapeHtml(e.name)}</span>${city ? `<span class="env-item-city">${escapeHtml(city)}</span>` : '<span class="env-item-city">Sin municipio</span>'}</div><div class="env-item-actions"><button type="button" data-env-action="edit" data-env-name="${escapeHtml(e.name)}" title="Editar ambiente ${escapeHtml(e.name)}" aria-label="Editar ambiente ${escapeHtml(e.name)}"><svg class="ui-icon" aria-hidden="true"><use href="#ui-pencil"></use></svg> Editar</button><button class="env-delete" type="button" data-env-action="delete" data-env-name="${escapeHtml(e.name)}" title="Eliminar ambiente ${escapeHtml(e.name)}" aria-label="Eliminar ambiente ${escapeHtml(e.name)}"><svg class="ui-icon" aria-hidden="true"><use href="#ui-trash"></use></svg> Eliminar</button></div></div>`;
       }).join('');
       $plannerEnvList.innerHTML = items || '<div class="hint">Sin ambientes.</div>';
     }
@@ -6450,12 +6863,12 @@ const sabSel = (!isGuianza && canonJornada(asg.jornada) === 'Noche') ? `
   <div id="envModal" class="env-modal" hidden>
     <div class="env-modal-card" role="dialog" aria-modal="true" aria-labelledby="envModalTitle" aria-describedby="envModalDescription">
       <div class="env-modal-head">
-        <div class="env-modal-symbol" aria-hidden="true">＋</div>
+        <div class="env-modal-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#ui-plus"></use></svg></div>
         <div class="env-modal-heading">
           <h2 id="envModalTitle">Nuevo ambiente</h2>
           <p id="envModalDescription">Complete los datos para añadirlo al planificador.</p>
         </div>
-        <button class="env-modal-close" id="envModalClose" type="button" aria-label="Cerrar ventana">×</button>
+        <button class="env-modal-close" id="envModalClose" type="button" aria-label="Cerrar ventana"><svg class="ui-icon" aria-hidden="true"><use href="#ui-x"></use></svg></button>
       </div>
       <form id="newEnvForm" autocomplete="off" novalidate>
         <div class="env-modal-body">
