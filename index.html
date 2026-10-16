@@ -2091,9 +2091,6 @@ ${lines.join('\n')}${extra}`,
     "SENATEC"
   ].map(normU));
 
-  // Municipios: solo IBAGUE y MELGAR
-  const ALLOWED_MUNICIPIOS = new Set(["IBAGUE","MELGAR"].map(normU));
-
   const normKey = (s) => normU(s).replace(/[^A-Z0-9]+/g,' ').trim();
 
   const PURPLE_PROGRAMS = [
@@ -3420,15 +3417,9 @@ function computeAvailableSets(){
       const parsedReportRows = buildReportRows(data);
       bumpDataVersion();
 
-      // Mantener el alcance original Ibagué/Melgar cuando existan en el reporte.
-      // Para otras regionales (p. ej. el ZIP de Quindío), tomar sus municipios reales
-      // y permitir filtrarlos con el selector de Municipios.
-      const useOriginalMunicipalities = parsedReportRows.some(r =>
-        ALLOWED_MUNICIPIOS.has(normU(r.NOMBRE_MUNICIPIO_CURSO))
-      );
+      // Incluir todos los municipios presentes en las fichas que cumplen las reglas de formación.
       allRows = parsedReportRows.filter(r =>
         ALLOWED_MODALIDADES.has(normU(r.MODALIDAD_FORMACION)) &&
-        (!useOriginalMunicipalities || ALLOWED_MUNICIPIOS.has(normU(r.NOMBRE_MUNICIPIO_CURSO))) &&
         !EXCLUDED_ESPECIALES.has(normU(r.NOMBRE_PROGRAMA_ESPECIAL))
       );
 
